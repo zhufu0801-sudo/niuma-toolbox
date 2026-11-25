@@ -1,0 +1,151 @@
+approvalBox|Approval boxes|Insert labelled approval or seal boxes.|Put the cursor at the insertion point; enter roles separated by commas.
+batchPdf|Batch PDF export|Export several Office files as separate PDFs.|Save the source files and select them in the file picker.
+batchReplace|Batch text replacement|Replace text in several documents and save new copies.|Choose the source documents; enter the text to find and its replacement.
+batchWatermark|Batch text watermarks|Add the same text watermark to document copies.|Choose the source documents and enter the watermark text.
+splitByHeading|Split by heading|Create a separate document for each heading section.|Apply real heading styles, save the document, and choose a heading level from 1 to 3.
+sendToDoc|Send to another document|Copy selected content, including supported formatting, to another open document.|Open the destination document in the same host; select the source content and choose the destination number if asked.
+insertToday|Insert today's date|Insert today's date in the selected format.|Place the cursor, select a cell, or select a text box for the date.
+unifyDates|Normalize dates|Convert recognized date expressions to one display format.|Select dates and choose the output format; inspect values that were not recognized.
+workdayCalc|Workday calculator|Count workdays between dates or calculate a date after a workday offset.|Enter a start date, then an end date or an offset; choose the holiday region.
+dateSummary|Summarize by period|Sum a date-and-amount range by month, quarter, or year in a new sheet.|Select the date and amount columns, then choose the period.
+deleteBlankPages|Remove blank pages|Remove pages that contain no content after confirmation.|Open the document and check the number of pages proposed for deletion.
+officialFormatCn|Chinese official document layout|Apply the supported margins, fonts, lines, and page numbers for Chinese official documents.|Save a copy and inspect the entire document after applying the layout.
+businessFormatJa|Japanese business document layout|Apply A4 paper, 10.5-point Mincho text, a centred title, and supported Japanese closing conventions.|Save a copy and check the title and closing lines before applying.
+fixPageJump|Fix unexpected page jumps|Clear paragraph settings that force unexpected page breaks.|Select the affected paragraphs and inspect pagination after processing.
+landscapePages|Landscape selection|Place selected content in a landscape section while keeping surrounding pages portrait.|Select the complete content to put on landscape pages.
+tableBeautify|Format Word tables|Apply borders, header formatting, alignment, and supported picture fitting.|Select the table content to format.
+pictureFix|Stabilize pictures|Convert supported floating pictures to inline placement and correct clipped display.|Select content containing the affected pictures.
+boldInlineHeads|Bold inline headings|Bold the heading portion before a colon in recognized numbered lines.|Select the paragraphs containing inline headings.
+alignOptions|Align answer choices|Use tab stops to align multiple-choice options.|Select the lines containing A, B, C, and D choices.
+noBreakLatin|Keep Latin text together|Prevent supported Latin words, URLs, and digit strings from breaking across lines.|Select the paragraphs containing those strings.
+removeWatermark|Remove watermarks|Remove supported header watermarks and page backgrounds.|Save a copy and check headers and backgrounds after processing.
+wordToPpt|Word to presentation|Create a presentation from document heading levels.|Use real heading styles to organize the document, then start conversion.
+addCjkSpace|Add CJK spacing|Insert a half-width space between Chinese text and Latin letters or digits.|Select the text to normalize.
+removeCjkSpace|Remove CJK spacing|Remove spaces between Chinese text and Latin letters or digits.|Select the text to normalize.
+batchRename|Batch file renaming|Add prefixes or suffixes, replace filename text, or number files.|Select files, choose the naming mode, and inspect the proposed change.
+insertPhrase|Insert a phrase|Insert a built-in phrase or a saved custom phrase.|Place the insertion point, select a phrase, or enter custom text.
+saveLinkedModule|Save a linked module|Save content with a reference to its source.|Save the source file and select a supported text or table range.
+insertLinkedModule|Insert a linked module|Insert a saved module and record the destination for later updates.|Choose a saved linked module and an editable destination.
+updateLinkedModules|Update linked content|Refresh linked content after checking its source version.|Open the source files and inspect the proposed updates in the destination.
+rmbUpper|Uppercase RMB amount|Convert an amount to Chinese uppercase RMB wording.|Select an amount such as 1234.5; inspect the converted wording.
+idCardInfo|ID card details|Validate a Chinese ID number and extract its birth date and sex fields.|Select the ID number cells with their full digits preserved.
+phoneCheck|Check mobile numbers|Check mobile number length and supported prefixes.|Select the column of phone numbers.
+zenHan|Normalize character width|Use half-width letters and digits and full-width Katakana.|Select the text cells to normalize.
+toWareki|Convert to Japanese era dates|Convert recognized Gregorian dates to Japanese era notation.|Select the date cells.
+toSeireki|Convert to Gregorian dates|Convert recognized Japanese era dates to Gregorian notation.|Select the era-date cells, such as R8.11.12.
+postalFormat|Format postal codes|Format Japanese seven-digit postal codes as 123-4567.|Select the postal-code cells.
+furigana|Show phonetic readings|Use PHONETIC to display readings stored with cell input.|Select cells that already contain phonetic input information.
+postalFill|Postal code and address lookup|Fill addresses from postal codes or postal codes from Japanese addresses.|Select one input column and leave the output column on its right empty.
+printPreflight|Print preflight|Check supported font, table-break, and print-area issues.|Open the document to print and review the reported issues.
+printKeepRows|Keep table rows together|Stop a table row from splitting across pages.|Select the affected table.
+printSheetSetup|Set print area and footer|Use the used range, one-page width, repeating headers, filename, and date for printing.|Open the sheet to print and inspect its used range.
+sendCheck|Pre-send document check|Report comments, revisions, hidden text, highlighting, and author information.|Save a copy; inspect the report before choosing any cleanup.
+proofCheck|Spelling and punctuation checks|Flag supported rule-based errors and punctuation problems.|Select text and choose comments, safe fixes plus comments, or removal of checker comments.
+jaStyle|Japanese prose style|Convert supported sentence endings between polite and plain Japanese.|Select Japanese prose and choose polite, da, or dearu style.
+compareDocs|Compare two versions|Create a document showing changes between two versions.|Open one version and select the second file when prompted.
+exportComments|Export comments and revisions|Summarize comments and revisions in a new document table.|Open the reviewed document and run the export.
+captionNumbers|Automatic figure and table captions|Insert supported automatic figure and table captions.|Choose pictures, tables, or both; check caption placement afterwards.
+fixListNumbering|Repair heading numbering|Rebuild automatic numbering from heading levels.|Apply heading styles, choose a numbering scheme, and decide whether to remove typed prefixes.
+sheetCheck|Spreadsheet diagnostic|Explain common lookup, sum, and numeric-display problems without changing data.|Select the affected data and review the diagnostic report.
+wanUnit|Display large-number units|Display amounts in selected units without changing their stored values.|Select numeric cells and choose the display unit.
+idCheck|Validate identifiers|Check supported identifier lengths, formats, and checksums.|Select identifiers stored without lost digits and choose their type.
+mergeWorkbooks|Merge workbooks|Stack data aligned by headers or copy complete worksheets into a result workbook.|Select source workbooks and choose data stacking or sheet copying.
+codesBatch|Batch QR codes and barcodes|Generate a code image for each selected value and place it to the right.|Select one column of URLs or identifiers and choose QR or Code 128.
+attendanceStats|Attendance counts|Count attendance marks for each person.|Select an attendance table containing names and daily marks.
+spotlight|Row and column spotlight|Highlight the current row and column.|Activate a cell; click again to turn the effect off.
+bandRows|Alternating row colours|Apply an alternating-row conditional format.|Select at least three rows, including the header; click again to remove the effect.
+textToNumber|Convert numeric text|Convert eligible numeric and date text into real values.|Select a range without merged cells; review the conversion count before confirming.
+extractNumbers|Extract digits|Write extracted digits in the empty column to the right.|Select one column and reserve a blank output column.
+extractChinese|Extract CJK text|Keep Chinese and Japanese characters in a new output column.|Select one column and reserve a blank output column.
+extractLetters|Extract Latin letters|Keep Latin letters and spaces in a new output column.|Select one column and reserve a blank output column.
+removeBrackets|Remove bracketed text|Remove supported brackets and their contents into a new output column.|Select one column and reserve a blank output column.
+compareRanges|Compare two ranges|Colour differences between two selected ranges.|Select one range, hold Ctrl, and select a second range on the same sheet.
+payrollSlips|Payslip layout|Create a new sheet with a header and data row for each person.|Select the payroll table including its single header row; do not include merged cells.
+mergedNumbering|Number merged cells|Fill differently sized merged cells with consecutive numbers.|Select the single column to number and review any values that will be overwritten.
+rankKeepOrder|Rank without sorting|Write descending RANK formulas to the right without moving source rows.|Select one numeric column without its header and leave the right column empty.
+dueReminder|Due-date highlighting|Mark past dates red and dates within 30 days yellow.|Select one column of real date values without its header; click again to remove the rule.
+progressBar|In-cell progress bars|Display numeric values as conditional-format data bars.|Select numeric or percentage cells.
+joinColumns|Join columns|Join each row into one cell to the right.|Select the source columns, leave output space empty, and choose a separator.
+splitToRows|Split a list into rows|Create rows from delimited cell contents and copy the remaining row fields.|Select the source data and inspect the new result sheet.
+stackColumns|Stack columns|Create a new sheet containing selected columns stacked into one column.|Select the columns to stack.
+printTitles|Repeat print headers|Repeat the header rows on each printed page.|Select the rows to use as print headers.
+fitOnePageWide|Fit to one page wide|Scale printing to one page wide without limiting its height.|Open the sheet to print and check print preview afterwards.
+deleteBlankRows|Delete blank rows|Remove rows that are blank within the selected range.|Select the bounded data range and inspect the deletion confirmation.
+sheetIndex|Worksheet index|Create a linked index sheet for the workbook.|Open the workbook whose sheets need an index.
+renameSheets|Rename worksheets|Replace text and add prefixes or suffixes in worksheet names.|Enter the name change and review it before confirming.
+splitByColumn|Split by category|Create one worksheet for each value in the current column.|Activate the category column in the data table.
+mergeSheets|Merge sheets|Stack worksheets with matching headers in a new sheet.|Check that source worksheets use the same header structure.
+exportSheets|Export worksheets|Save each worksheet as a separate XLSX file.|Save the workbook, then choose the output location if prompted.
+quickChart|Create a chart|Choose a column or line chart from the selected data.|Select labels and values; Ctrl-select nonadjacent columns if needed.
+swapColumns|Swap two columns|Exchange the contents of two selected columns.|Select two adjacent columns or Ctrl-select two separate columns.
+transposeRange|Transpose rows and columns|Create a transposed copy in a new sheet.|Select the rectangular source range.
+alignNames|Align names|Use distributed alignment without inserting spaces into names.|Select the name cells.
+colorSumCount|Summarize by fill colour|Count cells and sum values by their fill colour.|Select the coloured cells to summarize.
+addPrefixSuffix|Add prefixes and suffixes|Add text before or after selected cell contents.|Select the cells and enter the prefix and suffix.
+wrapIferror|Hide formula errors|Wrap selected formulas in IFERROR with a blank fallback.|Select the formulas to change and retain a backup of the originals.
+maskData|Mask cell values|Replace the middle of supported sensitive values with asterisks.|Select the sensitive cells; use the full masking panel when you need a restoration table.
+unitSum|Sum text with units|Sum supported numeric text that includes unit suffixes.|Select values such as 12元 or 3.5kg and inspect the output units.
+columnsForPrint|Print a narrow list in columns|Rearrange a long narrow table into side-by-side groups.|Select the list and choose two to six groups or automatic layout.
+listToTable|Turn a list into a table|Arrange a repeated vertical list into one record per row.|Select the list and enter the number of lines per record.
+rangeToImage|Export a range as an image|Save a spreadsheet range as a PNG image.|Select the range and choose the output location.
+picturesByName|Insert pictures by filename|Match selected names to image filenames and insert pictures to the right.|Select the name column and choose the image folder.
+diagonalHeader|Diagonal header|Create a supported diagonal table header.|Select the upper-left table cell and follow the header-text prompt.
+formatHeader|Format a header row|Emphasize the first row of the selected range.|Select the range including its header.
+fitColumns|Auto-fit column widths|Adjust column widths to their contents.|Select the columns or cells to fit.
+wrapCells|Wrap cell text|Enable wrapping so cell text can display on several lines.|Select the target cells.
+filterCells|Toggle filter|Enable or remove filtering on the selected data.|Select the data range including headers.
+trimCells|Trim cell whitespace|Remove leading and trailing whitespace from text cells.|Select the text cells to clean.
+removeDuplicates|Remove duplicate rows|Keep the first row of each duplicate set.|Select the table and inspect the duplicate criteria and confirmation.
+replaceText|Replace selected text|Replace supported matching text in the current selection.|Select the source text or cells, then enter find and replacement text.
+centerAcross|Centre across selection|Centre a title across cells without merging them.|Select the title and adjacent cells.
+shrinkToFit|Shrink text to fit|Reduce displayed text size without changing column width.|Select the target cells.
+fillBlanks|Fill from above|Fill blank cells from the preceding cell in the same column.|Select the bounded range and verify that blank cells should inherit the value above.
+fitPicturesToCells|Fit pictures to cells|Resize and centre supported pictures within selected cells.|Select the cells containing the pictures.
+matchFormat|Match nearby formatting|Adapt supported inserted content to nearby text or slide formatting.|Select the inserted content; in spreadsheets, follow the format-painter guidance.
+slidesToImages|Export slide images|Export visible slides as PNGs and optionally a long image.|Choose separate images or images plus a long image and choose an output folder.
+handoutPdf|Handout PDF|Export several slides per page as a handout PDF where supported.|Choose one, two, three, four, six, or nine slides per page.
+slimDeck|Remove unused layouts|Remove unused layouts and masters without deleting slide content.|Save a copy and review the count before confirming.
+makeSlides|Create slides from an outline|Insert new slides after the current slide using a text outline.|Open the Create panel, enter the outline, and select the insertion slide.
+insertTable|Insert a table|Create a table from tab-separated columns and newline-separated rows.|Enter the table text in the Create panel and choose the insertion point.
+formatSlide|Format the current slide|Unify body text formatting while preserving title size.|Activate the slide to format.
+duplicateSlide|Duplicate the current slide|Create a copy of the current slide.|Click the source slide in the thumbnail pane.
+unifyDeckFont|Unify presentation fonts|Apply one font to text boxes and tables while preserving font sizes.|Enter a font or leave it blank to use the most common font in the deck.
+removeAnimations|Remove animations|Remove supported animations and slide transitions throughout the deck.|Save a copy and check the reported effects before confirming.
+unifyTitles|Unify slide titles|Match supported title position, size, and colour to the reference title.|Use at least two slides and optionally enter a title size.
+slideNumbers|Slide numbers|Add slide numbers at the lower right.|Choose whether to show a number on the cover slide.
+bodySpacing|Unify body line spacing|Apply one body-text line-spacing multiplier across slides.|Enter a multiplier from 0.8 to 3, or leave blank for 1.2.
+arrangeVisuals|Arrange pictures and charts|Arrange supported visual objects in a proportional grid.|Choose the current slide or all slides and optionally one to six columns.
+applyDesign|Apply a presentation template|Apply another presentation's supported design, colours, and layouts.|Save a copy and select the template file.
+removeNotes|Remove speaker notes|Clear supported speaker-note text throughout the presentation.|Save a copy and inspect the note count before confirming.
+saveCard|Save a content card|Save selected text or a table for later reuse.|Select the reusable content and enter its card details.
+insertCard|Insert a content card|Insert a saved card into the current document.|Select a card and an editable insertion point.
+capture|Capture selected content|Save selected content in the local transfer area.|Select supported text or a table in the source document.
+insertTransfer|Insert transferred content|Insert content from the local transfer area.|Open the destination and choose an insertion point.
+insertLatest|Insert the latest card|Insert the most recently saved content card.|Open the destination and choose an insertion point.
+pasteBarCollect|Collect in paste bar|Collect selected text or table content in the local paste bar.|Select the source content and run collection.
+pasteBarInsert|Insert from paste bar|Insert a selected paste-bar item into the destination.|Choose an item and place the destination cursor or active cell.
+backupFile|Back up the current file|Create a timestamped backup of the saved file.|Save current changes before making the backup.
+exportPdf|Export PDF|Export the current supported layout as a new PDF.|Save the source document and inspect the PDF after export.
+paraNormalize|Normalize paragraphs|Replace space-based indents and manual breaks with paragraph formatting.|Select the body paragraphs; check headings after processing.
+tableOnePage|Fit a table on one page|Try to pull a table that spills onto the next page back to one page.|Select the affected table and check readability after processing.
+fitOneLine|Fit text on one line|Tighten character spacing to bring a slightly overlong line back together.|Select the short text that needs adjustment.
+printBigText|Print large characters|Create large-character pages for signs and labels.|Enter the characters to print and inspect the resulting pages.
+photoToPrint|Clean a document photo|Reduce the grey background of a photographed document for printing.|Choose the document image and inspect the generated result.
+signatureClean|Remove a signature background|Make the white background of a signature image transparent.|Choose the signature image and check the resulting edges.
+removeHeaderLine|Remove the header rule|Remove the line below a header while preserving header text.|Open the document and inspect its header afterwards.
+deleteAnswers|Clear bracketed answers|Clear supported answer characters inside exam brackets.|Select the exercise text and check which brackets were changed.
+contractSign|Align contract signatures|Use tab stops to place two parties' signature blocks side by side.|Select the signature lines to align.
+tablePictureFit|Fit table pictures|Fix table column widths and proportionally shrink pictures to fit.|Select the table containing the pictures.
+superSubscript|Chemical and unit scripts|Apply supported superscripts and subscripts to units and chemical expressions.|Select text such as m2 or H2O.
+alignSignature|Right-align signature lines|Right-align selected closing lines and remove alignment spaces.|Select only the closing or signature lines.
+insertFiles|Merge Word documents|Append selected documents in filename order.|Save the destination and choose the source documents.
+autoBorder|Automatic row borders|Add conditional borders to rows when they contain data.|Select the data-entry area.
+heading1|Heading 1|Apply the first heading level to selected paragraphs.|Select the chapter heading paragraphs.
+heading2|Heading 2|Apply the second heading level to selected paragraphs.|Select the section heading paragraphs.
+bodyFormat|Format selected body text|Unify body font and spacing while skipping recognized headings.|Select the body text; Ctrl+A may include the whole document because recognized headings are skipped.
+toc|Insert or update a contents table|Build a table of contents from heading levels one to three.|Apply heading styles first; place the cursor for a new contents table or run to update existing ones.
+textTable|Text to table|Convert tab-separated text into a Word table.|Select text that uses tabs between columns and paragraph breaks between rows.
+removeBlankParas|Remove empty paragraphs|Remove complete empty paragraphs inside the selection.|Select normal body text without tables or tracked changes.
+unifyPictures|Unify picture width|Use the first inline picture's width for the other selected pictures.|Select at least two inline pictures; their heights keep their own proportions.
+fitPictures|Fit pictures within margins|Shrink inline pictures that exceed the available text width.|Select the content containing inline pictures.
+idCardSize|Set card dimensions|Set one or two card images to 8.56 by 5.4 centimetres.|Crop away the background first and select only the card images.

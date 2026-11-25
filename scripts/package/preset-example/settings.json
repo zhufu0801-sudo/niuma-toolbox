@@ -1,0 +1,9 @@
+{
+  "settings": {
+    "ui": { "language": "ja" },
+    "text": { "font": "游明朝", "size": 10.5, "lineSpacing": 1.5 },
+    "export": { "wps": "docx", "et": "xlsx", "wpp": "pptx", "drop": "docx" }
+  },
+  "revision": 1,
+  "initialized": true
+}

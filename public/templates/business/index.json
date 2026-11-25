@@ -1,0 +1,58 @@
+[
+  {
+    "id": "invoice-ja",
+    "title": "請求書",
+    "lang": "ja",
+    "file": "invoice-ja.xlsx",
+    "kind": "business"
+  },
+  {
+    "id": "quote-ja",
+    "title": "見積書",
+    "lang": "ja",
+    "file": "quote-ja.xlsx",
+    "kind": "business"
+  },
+  {
+    "id": "delivery-ja",
+    "title": "納品書",
+    "lang": "ja",
+    "file": "delivery-ja.xlsx",
+    "kind": "business"
+  },
+  {
+    "id": "receipt-ja",
+    "title": "領収書",
+    "lang": "ja",
+    "file": "receipt-ja.xlsx",
+    "kind": "business"
+  },
+  {
+    "id": "quote-zh",
+    "title": "报价单",
+    "lang": "zh",
+    "file": "quote-zh.xlsx",
+    "kind": "business"
+  },
+  {
+    "id": "receipt-zh",
+    "title": "收款收据",
+    "lang": "zh",
+    "file": "receipt-zh.xlsx",
+    "kind": "business"
+  },
+  {
+    "id": "delivery-zh",
+    "title": "送货单",
+    "lang": "zh",
+    "file": "delivery-zh.xlsx",
+    "kind": "business"
+  },
+  {
+    "id": "contract-zh",
+    "title": "合同常用格式",
+    "lang": "zh",
+    "file": "contract-zh.xlsx",
+    "kind": "business"
+  }
+]

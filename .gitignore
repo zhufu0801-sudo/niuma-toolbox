@@ -1,0 +1,33 @@
+# 依赖和运行时
+node_modules/
+runtime/
+# 运行中产生的文件（用户数据、日志、生成结果）
+generated/
+work/
+release/
+*.log
+service*.log
+# 本机设置、密钥、证书（测试用证书 test/fixtures/test-only-localhost.pfx 除外）
+.env
+*.pem
+*.key
+*.pfx
+!test/fixtures/test-only-localhost.pfx
+本机安装记录.json
+# 系统文件
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Local-only handoffs, evidence, and screenshots
+.learnings/
+CLAUDE.md
+*交给Codex*.md
+*交给Claude*.md
+*验收记录*.md
+真机验收矩阵-*.md
+Claude复核结果*.md
+Codex交付*.md
+Codex修复*.md
+/*.png
+/*.jpg

@@ -1,0 +1,65 @@
+[
+  {
+    "id": "apology-ja",
+    "title": "始末書",
+    "lang": "ja",
+    "file": "apology-ja.docx",
+    "kind": "forms"
+  },
+  {
+    "id": "daily-ja",
+    "title": "業務日報",
+    "lang": "ja",
+    "file": "daily-ja.docx",
+    "kind": "forms"
+  },
+  {
+    "id": "minutes-ja",
+    "title": "議事録",
+    "lang": "ja",
+    "file": "minutes-ja.docx",
+    "kind": "forms"
+  },
+  {
+    "id": "order-ja",
+    "title": "発注書",
+    "lang": "ja",
+    "file": "order-ja.xlsx",
+    "kind": "forms"
+  },
+  {
+    "id": "ringi-ja",
+    "title": "稟議書",
+    "lang": "ja",
+    "file": "ringi-ja.docx",
+    "kind": "forms"
+  },
+  {
+    "id": "expense-zh",
+    "title": "费用报销单",
+    "lang": "zh",
+    "file": "expense-zh.xlsx",
+    "kind": "forms"
+  },
+  {
+    "id": "leave-zh",
+    "title": "请假单",
+    "lang": "zh",
+    "file": "leave-zh.docx",
+    "kind": "forms"
+  },
+  {
+    "id": "minutes-zh",
+    "title": "会议纪要",
+    "lang": "zh",
+    "file": "minutes-zh.docx",
+    "kind": "forms"
+  },
+  {
+    "id": "weekly-zh",
+    "title": "工作周报",
+    "lang": "zh",
+    "file": "weekly-zh.docx",
+    "kind": "forms"
+  }
+]

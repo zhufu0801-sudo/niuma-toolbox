@@ -1,0 +1,7 @@
+{
+  "provider": "custom",
+  "baseUrl": "https://ai-gateway.example.co.jp/v1",
+  "model": "company-standard",
+  "apiKey": "",
+  "privacy": { "mode": "mask" }
+}

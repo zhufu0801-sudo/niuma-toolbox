@@ -1,0 +1,602 @@
+[
+  {
+    "id": "work-report-zh",
+    "title": "工作汇报",
+    "lang": "zh",
+    "file": "work-report-zh.pptx",
+    "preview": "work-report-zh.png",
+    "kind": "ppt",
+    "theme": "work-report",
+    "colors": {
+      "background": "092E40",
+      "accent": "D4F543"
+    },
+    "layouts": [
+      "cover",
+      "agenda",
+      "chapter",
+      "points",
+      "metric",
+      "timeline",
+      "compare",
+      "picture",
+      "quote",
+      "closing"
+    ]
+  },
+  {
+    "id": "work-report-ja",
+    "title": "業務報告",
+    "lang": "ja",
+    "file": "work-report-ja.pptx",
+    "preview": "work-report-ja.png",
+    "kind": "ppt",
+    "theme": "work-report",
+    "colors": {
+      "background": "092E40",
+      "accent": "D4F543"
+    },
+    "layouts": [
+      "cover",
+      "agenda",
+      "chapter",
+      "points",
+      "metric",
+      "timeline",
+      "compare",
+      "picture",
+      "quote",
+      "closing"
+    ]
+  },
+  {
+    "id": "year-review-zh",
+    "title": "年终总结",
+    "lang": "zh",
+    "file": "year-review-zh.pptx",
+    "preview": "year-review-zh.png",
+    "kind": "ppt",
+    "theme": "year-review",
+    "colors": {
+      "background": "181719",
+      "accent": "E9B5A5"
+    },
+    "layouts": [
+      "cover",
+      "agenda",
+      "chapter",
+      "points",
+      "metric",
+      "timeline",
+      "compare",
+      "picture",
+      "quote",
+      "closing"
+    ]
+  },
+  {
+    "id": "year-review-ja",
+    "title": "年間活動報告",
+    "lang": "ja",
+    "file": "year-review-ja.pptx",
+    "preview": "year-review-ja.png",
+    "kind": "ppt",
+    "theme": "year-review",
+    "colors": {
+      "background": "181719",
+      "accent": "E9B5A5"
+    },
+    "layouts": [
+      "cover",
+      "agenda",
+      "chapter",
+      "points",
+      "metric",
+      "timeline",
+      "compare",
+      "picture",
+      "quote",
+      "closing"
+    ]
+  },
+  {
+    "id": "pitch-zh",
+    "title": "路演融资",
+    "lang": "zh",
+    "file": "pitch-zh.pptx",
+    "preview": "pitch-zh.png",
+    "kind": "ppt",
+    "theme": "pitch",
+    "colors": {
+      "background": "1B1240",
+      "accent": "79EFDD"
+    },
+    "layouts": [
+      "cover",
+      "agenda",
+      "chapter",
+      "points",
+      "metric",
+      "timeline",
+      "compare",
+      "picture",
+      "quote",
+      "closing"
+    ]
+  },
+  {
+    "id": "pitch-ja",
+    "title": "事業提案",
+    "lang": "ja",
+    "file": "pitch-ja.pptx",
+    "preview": "pitch-ja.png",
+    "kind": "ppt",
+    "theme": "pitch",
+    "colors": {
+      "background": "1B1240",
+      "accent": "79EFDD"
+    },
+    "layouts": [
+      "cover",
+      "agenda",
+      "chapter",
+      "points",
+      "metric",
+      "timeline",
+      "compare",
+      "picture",
+      "quote",
+      "closing"
+    ]
+  },
+  {
+    "id": "product-launch-zh",
+    "title": "产品发布",
+    "lang": "zh",
+    "file": "product-launch-zh.pptx",
+    "preview": "product-launch-zh.png",
+    "kind": "ppt",
+    "theme": "product-launch",
+    "colors": {
+      "background": "251043",
+      "accent": "FF9B45"
+    },
+    "layouts": [
+      "cover",
+      "agenda",
+      "chapter",
+      "points",
+      "metric",
+      "timeline",
+      "compare",
+      "picture",
+      "quote",
+      "closing"
+    ]
+  },
+  {
+    "id": "product-launch-ja",
+    "title": "製品発表",
+    "lang": "ja",
+    "file": "product-launch-ja.pptx",
+    "preview": "product-launch-ja.png",
+    "kind": "ppt",
+    "theme": "product-launch",
+    "colors": {
+      "background": "251043",
+      "accent": "FF9B45"
+    },
+    "layouts": [
+      "cover",
+      "agenda",
+      "chapter",
+      "points",
+      "metric",
+      "timeline",
+      "compare",
+      "picture",
+      "quote",
+      "closing"
+    ]
+  },
+  {
+    "id": "training-zh",
+    "title": "培训教学",
+    "lang": "zh",
+    "file": "training-zh.pptx",
+    "preview": "training-zh.png",
+    "kind": "ppt",
+    "theme": "training",
+    "colors": {
+      "background": "173E3B",
+      "accent": "FF927D"
+    },
+    "layouts": [
+      "cover",
+      "agenda",
+      "chapter",
+      "points",
+      "metric",
+      "timeline",
+      "compare",
+      "picture",
+      "quote",
+      "closing"
+    ]
+  },
+  {
+    "id": "training-ja",
+    "title": "研修・教育",
+    "lang": "ja",
+    "file": "training-ja.pptx",
+    "preview": "training-ja.png",
+    "kind": "ppt",
+    "theme": "training",
+    "colors": {
+      "background": "173E3B",
+      "accent": "FF927D"
+    },
+    "layouts": [
+      "cover",
+      "agenda",
+      "chapter",
+      "points",
+      "metric",
+      "timeline",
+      "compare",
+      "picture",
+      "quote",
+      "closing"
+    ]
+  },
+  {
+    "id": "creative-zh",
+    "title": "创意提案",
+    "lang": "zh",
+    "file": "creative-zh.pptx",
+    "preview": "creative-zh.png",
+    "kind": "ppt",
+    "theme": "creative",
+    "colors": {
+      "background": "202433",
+      "accent": "FFD342"
+    },
+    "layouts": [
+      "cover",
+      "agenda",
+      "chapter",
+      "points",
+      "metric",
+      "timeline",
+      "compare",
+      "picture",
+      "quote",
+      "closing"
+    ]
+  },
+  {
+    "id": "creative-ja",
+    "title": "クリエイティブ提案",
+    "lang": "ja",
+    "file": "creative-ja.pptx",
+    "preview": "creative-ja.png",
+    "kind": "ppt",
+    "theme": "creative",
+    "colors": {
+      "background": "202433",
+      "accent": "FFD342"
+    },
+    "layouts": [
+      "cover",
+      "agenda",
+      "chapter",
+      "points",
+      "metric",
+      "timeline",
+      "compare",
+      "picture",
+      "quote",
+      "closing"
+    ]
+  },
+  {
+    "id": "marketing-zh",
+    "title": "营销方案",
+    "lang": "zh",
+    "file": "marketing-zh.pptx",
+    "preview": "marketing-zh.png",
+    "kind": "ppt",
+    "theme": "marketing",
+    "colors": {
+      "background": "4B183A",
+      "accent": "FFB66B"
+    },
+    "layouts": [
+      "cover",
+      "agenda",
+      "chapter",
+      "points",
+      "metric",
+      "timeline",
+      "compare",
+      "picture",
+      "quote",
+      "closing"
+    ]
+  },
+  {
+    "id": "marketing-ja",
+    "title": "マーケティング計画",
+    "lang": "ja",
+    "file": "marketing-ja.pptx",
+    "preview": "marketing-ja.png",
+    "kind": "ppt",
+    "theme": "marketing",
+    "colors": {
+      "background": "4B183A",
+      "accent": "FFB66B"
+    },
+    "layouts": [
+      "cover",
+      "agenda",
+      "chapter",
+      "points",
+      "metric",
+      "timeline",
+      "compare",
+      "picture",
+      "quote",
+      "closing"
+    ]
+  },
+  {
+    "id": "academic-zh",
+    "title": "学术答辩",
+    "lang": "zh",
+    "file": "academic-zh.pptx",
+    "preview": "academic-zh.png",
+    "kind": "ppt",
+    "theme": "academic",
+    "colors": {
+      "background": "103F32",
+      "accent": "E7C577"
+    },
+    "layouts": [
+      "cover",
+      "agenda",
+      "chapter",
+      "points",
+      "metric",
+      "timeline",
+      "compare",
+      "picture",
+      "quote",
+      "closing"
+    ]
+  },
+  {
+    "id": "academic-ja",
+    "title": "研究発表",
+    "lang": "ja",
+    "file": "academic-ja.pptx",
+    "preview": "academic-ja.png",
+    "kind": "ppt",
+    "theme": "academic",
+    "colors": {
+      "background": "103F32",
+      "accent": "E7C577"
+    },
+    "layouts": [
+      "cover",
+      "agenda",
+      "chapter",
+      "points",
+      "metric",
+      "timeline",
+      "compare",
+      "picture",
+      "quote",
+      "closing"
+    ]
+  },
+  {
+    "id": "event-zh",
+    "title": "活动宣传",
+    "lang": "zh",
+    "file": "event-zh.pptx",
+    "preview": "event-zh.png",
+    "kind": "ppt",
+    "theme": "event",
+    "colors": {
+      "background": "2B2157",
+      "accent": "F4EF72"
+    },
+    "layouts": [
+      "cover",
+      "agenda",
+      "chapter",
+      "points",
+      "metric",
+      "timeline",
+      "compare",
+      "picture",
+      "quote",
+      "closing"
+    ]
+  },
+  {
+    "id": "event-ja",
+    "title": "イベント案内",
+    "lang": "ja",
+    "file": "event-ja.pptx",
+    "preview": "event-ja.png",
+    "kind": "ppt",
+    "theme": "event",
+    "colors": {
+      "background": "2B2157",
+      "accent": "F4EF72"
+    },
+    "layouts": [
+      "cover",
+      "agenda",
+      "chapter",
+      "points",
+      "metric",
+      "timeline",
+      "compare",
+      "picture",
+      "quote",
+      "closing"
+    ]
+  },
+  {
+    "id": "brand-zh",
+    "title": "品牌介绍",
+    "lang": "zh",
+    "file": "brand-zh.pptx",
+    "preview": "brand-zh.png",
+    "kind": "ppt",
+    "theme": "brand",
+    "colors": {
+      "background": "15171B",
+      "accent": "92BDFF"
+    },
+    "layouts": [
+      "cover",
+      "agenda",
+      "chapter",
+      "points",
+      "metric",
+      "timeline",
+      "compare",
+      "picture",
+      "quote",
+      "closing"
+    ]
+  },
+  {
+    "id": "brand-ja",
+    "title": "ブランド紹介",
+    "lang": "ja",
+    "file": "brand-ja.pptx",
+    "preview": "brand-ja.png",
+    "kind": "ppt",
+    "theme": "brand",
+    "colors": {
+      "background": "15171B",
+      "accent": "92BDFF"
+    },
+    "layouts": [
+      "cover",
+      "agenda",
+      "chapter",
+      "points",
+      "metric",
+      "timeline",
+      "compare",
+      "picture",
+      "quote",
+      "closing"
+    ]
+  },
+  {
+    "id": "retrospective-zh",
+    "title": "项目复盘",
+    "lang": "zh",
+    "file": "retrospective-zh.pptx",
+    "preview": "retrospective-zh.png",
+    "kind": "ppt",
+    "theme": "retrospective",
+    "colors": {
+      "background": "103B50",
+      "accent": "65E2C4"
+    },
+    "layouts": [
+      "cover",
+      "agenda",
+      "chapter",
+      "points",
+      "metric",
+      "timeline",
+      "compare",
+      "picture",
+      "quote",
+      "closing"
+    ]
+  },
+  {
+    "id": "retrospective-ja",
+    "title": "プロジェクト振り返り",
+    "lang": "ja",
+    "file": "retrospective-ja.pptx",
+    "preview": "retrospective-ja.png",
+    "kind": "ppt",
+    "theme": "retrospective",
+    "colors": {
+      "background": "103B50",
+      "accent": "65E2C4"
+    },
+    "layouts": [
+      "cover",
+      "agenda",
+      "chapter",
+      "points",
+      "metric",
+      "timeline",
+      "compare",
+      "picture",
+      "quote",
+      "closing"
+    ]
+  },
+  {
+    "id": "festival-zh",
+    "title": "节日庆典",
+    "lang": "zh",
+    "file": "festival-zh.pptx",
+    "preview": "festival-zh.png",
+    "kind": "ppt",
+    "theme": "festival",
+    "colors": {
+      "background": "6C1827",
+      "accent": "EFC876"
+    },
+    "layouts": [
+      "cover",
+      "agenda",
+      "chapter",
+      "points",
+      "metric",
+      "timeline",
+      "compare",
+      "picture",
+      "quote",
+      "closing"
+    ]
+  },
+  {
+    "id": "festival-ja",
+    "title": "祝祭・記念行事",
+    "lang": "ja",
+    "file": "festival-ja.pptx",
+    "preview": "festival-ja.png",
+    "kind": "ppt",
+    "theme": "festival",
+    "colors": {
+      "background": "6C1827",
+      "accent": "EFC876"
+    },
+    "layouts": [
+      "cover",
+      "agenda",
+      "chapter",
+      "points",
+      "metric",
+      "timeline",
+      "compare",
+      "picture",
+      "quote",
+      "closing"
+    ]
+  }
+]

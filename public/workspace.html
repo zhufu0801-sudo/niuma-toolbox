@@ -1,0 +1,8 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>内容工作台 · 办公工具箱</title><link rel="stylesheet" href="workspace.css"><link rel="stylesheet" href="workspace-polish.css"></head>
+<body><header><a href="tools.html">← 办公工具箱</a><span>办公工具箱 · 内容工作台</span></header>
+<main><section class="intro"><div><p class="eyebrow">让内容自由组合</p><h1>一份内容，四种用法。</h1><p>从文件提取文字与表格，按块整理，再生成你需要的格式。</p></div><label class="primary file">＋ 导入文件<input id="files" type="file" accept=".docx,.pptx,.xlsx,.pdf" multiple></label></section>
+<p class="notice">当前采用内容重组，不保留完整原版式。原文件不会被修改；PDF 扫描件需要先做 OCR。文件仅在本机处理，本模块不调用 AI。</p>
+<div id="status" role="status" aria-live="polite">准备好了，导入文件或添加一段内容开始。</div>
+<div class="layout"><section><div class="section-title"><h2>内容积木 <span id="count">0</span></h2><div><button id="addText">＋ 文字</button><button id="addTable">＋ 表格</button><button id="undo" disabled>撤销</button></div></div><p class="muted">上下移动调整顺序；可以复制、编辑或删除内容块。工作台内容仅保留在当前页面，关闭前请导出。</p><div id="blocks"></div></section>
+<aside><h2>生成文件</h2><p class="muted">先检查，再确认生成。每次都会创建新文件。</p><label for="target">目标格式</label><select id="target"><option value="docx">Word 文档 · .docx</option><option value="pptx">PPT 演示 · .pptx</option><option value="xlsx">Excel 表格 · .xlsx</option><option value="pdf">PDF 文档 · .pdf</option></select><button class="primary full" id="check">检查能否转换</button><div id="review" hidden><h3>转换前请确认</h3><ul id="warnings"></ul><label><input type="checkbox" id="ack"> 我已了解上述限制</label><button class="primary full" id="export" disabled>确认并下载</button></div><p class="muted">“移动”目前指工作台内调整内容顺序，不会删除原文档。直接写入已打开文档的功能尚未接入。</p></aside></div></main><script src="workspace.js"></script></body></html>

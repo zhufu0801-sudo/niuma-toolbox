@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>办公工具箱</title>
+<link rel="icon" href="icons/toolbox.svg" type="image/svg+xml">
+<link rel="stylesheet" href="start.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+<defs>
+<symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></symbol>
+<symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 00.3 1.9l.1.1a2 2 0 11-2.8 2.8l-.1-.1a1.7 1.7 0 00-1.9-.3 1.7 1.7 0 00-1 1.5V21a2 2 0 11-4 0v-.1a1.7 1.7 0 00-1.1-1.5 1.7 1.7 0 00-1.9.3l-.1.1a2 2 0 11-2.8-2.8l.1-.1a1.7 1.7 0 00.3-1.9 1.7 1.7 0 00-1.5-1H3a2 2 0 110-4h.1a1.7 1.7 0 001.5-1.1 1.7 1.7 0 00-.3-1.9l-.1-.1a2 2 0 112.8-2.8l.1.1a1.7 1.7 0 001.9.3H9a1.7 1.7 0 001-1.5V3a2 2 0 114 0v.1a1.7 1.7 0 001 1.5 1.7 1.7 0 001.9-.3l.1-.1a2 2 0 112.8 2.8l-.1.1a1.7 1.7 0 00-.3 1.9V9a1.7 1.7 0 001.5 1H21a2 2 0 110 4h-.1a1.7 1.7 0 00-1.5 1z"/></symbol>
+<symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 114 2c-.9.6-1.5 1.1-1.5 2.2M12 17h.01"/></symbol>
+<symbol id="i-notes" viewBox="0 0 24 24"><path d="M5 4h14v16H5z"/><path d="M8 9h8M8 13h8M8 17h5"/></symbol>
+<symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5h.01"/></symbol>
+<symbol id="i-ok" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M7.5 12.5l3 3 6-6.5"/></symbol>
+<symbol id="i-warn" viewBox="0 0 24 24"><path d="M12 3.5l9.5 16.5h-19z"/><path d="M12 10v4.5M12 17.5h.01"/></symbol>
+<symbol id="i-wait" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12h.01M12 12h.01M16 12h.01"/></symbol>
+<symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 11a8 8 0 00-14.5-4M4 4v4h4M4 13a8 8 0 0014.5 4M20 20v-4h-4"/></symbol>
+</defs>
+</svg>
+
+<div class="shell">
+  <div id="versionBanner" class="banner" role="alert" hidden>
+    <svg class="ic" aria-hidden="true" focusable="false"><use href="#i-warn"/></svg>
+    <div>
+      <strong>服务版本不一致，请重新启动办公工具箱</strong>
+      <p id="versionDetail"></p>
+      <p>请关闭这个窗口，再双击桌面的“办公工具箱”。重新启动前，“开始使用”不可点击。</p>
+    </div>
+  </div>
+
+  <div class="layout">
+    <section class="rail" aria-labelledby="appTitle">
+      <div class="tile"><img src="icons/toolbox.svg" width="34" height="34" alt=""></div>
+      <div>
+        <h1 id="appTitle">办公工具箱</h1>
+        <p id="version" class="version">正在读取版本…</p>
+      </div>
+      <p class="promise">只在这台电脑上运行，不需要联网，也不使用 AI。</p>
+      <div class="lang-switch" role="group" aria-label="显示语言">
+        <button type="button" data-lang="auto" aria-pressed="false">跟随系统</button>
+        <button type="button" data-lang="zh" aria-pressed="false" lang="zh-CN" translate="no">中文</button>
+        <button type="button" data-lang="ja" aria-pressed="false" lang="ja" translate="no">日本語</button>
+      </div>
+
+      <div class="start-box">
+        <button id="startBtn" type="button" class="start" disabled aria-describedby="startHint">
+          <svg class="ic" aria-hidden="true" focusable="false"><use href="#i-play"/></svg>
+          <span id="startLabel">开始使用</span>
+        </button>
+        <p id="startHint" class="start-hint">正在检查运行状态…</p>
+        <div id="launchMsg" class="launch-msg" role="status" aria-live="polite" hidden>
+          <span id="launchText"></span>
+          <span id="launchSub" class="sub" hidden></span>
+        </div>
+      </div>
+    </section>
+
+    <main class="panel">
+      <div class="panel-head">
+        <h2>运行状态</h2>
+        <button id="recheckBtn" type="button" class="ghost">
+          <svg id="recheckIcon" class="ic" aria-hidden="true" focusable="false"><use href="#i-refresh"/></svg>
+          <span>重新检查</span>
+        </button>
+      </div>
+
+      <ul class="status-list" aria-live="polite">
+        <li id="row-svc" class="status-row" data-state="wait">
+          <svg class="state-icon" aria-hidden="true" focusable="false"><use href="#i-wait"/></svg>
+          <div>
+            <span class="row-label">本地服务</span>
+            <span id="val-svc" class="row-value">正在检查…</span>
+            <span id="sub-svc" class="row-sub" hidden></span>
+          </div>
+        </li>
+        <li id="row-wps" class="status-row" data-state="wait">
+          <svg class="state-icon" aria-hidden="true" focusable="false"><use href="#i-wait"/></svg>
+          <div>
+            <span class="row-label">WPS</span>
+            <span id="val-wps" class="row-value">正在检查…</span>
+            <span id="sub-wps" class="row-sub" hidden></span>
+          </div>
+        </li>
+        <li id="row-office" class="status-row" data-state="wait">
+          <svg class="state-icon" aria-hidden="true" focusable="false"><use href="#i-wait"/></svg>
+          <div>
+            <span class="row-label">Microsoft Office</span>
+            <span id="val-office" class="row-value">正在检查…</span>
+            <span id="sub-office" class="row-sub" hidden></span>
+          </div>
+        </li>
+        <li id="row-cards" class="status-row" data-state="wait">
+          <svg class="state-icon" aria-hidden="true" focusable="false"><use href="#i-wait"/></svg>
+          <div>
+            <span class="row-label">内容卡片</span>
+            <span id="val-cards" class="row-value">正在检查…</span>
+            <span id="sub-cards" class="row-sub" hidden></span>
+          </div>
+        </li>
+        <li id="row-backup" class="status-row" data-state="wait">
+          <svg class="state-icon" aria-hidden="true" focusable="false"><use href="#i-wait"/></svg>
+          <div>
+            <span class="row-label">备份位置</span>
+            <span id="val-backup" class="row-value">正在检查…</span>
+            <span id="sub-backup" class="row-sub path" translate="no" hidden></span>
+          </div>
+        </li>
+      </ul>
+
+      <nav class="more" aria-label="更多">
+        <a class="chip" href="settings.html">
+          <svg class="ic" aria-hidden="true" focusable="false"><use href="#i-gear"/></svg>设置
+        </a>
+        <button type="button" class="chip" data-info="help" aria-expanded="false" aria-controls="info-help">
+          <svg class="ic" aria-hidden="true" focusable="false"><use href="#i-help"/></svg>使用说明
+        </button>
+        <button type="button" class="chip" data-info="updates" aria-expanded="false" aria-controls="info-updates">
+          <svg class="ic" aria-hidden="true" focusable="false"><use href="#i-notes"/></svg>更新说明
+        </button>
+        <button type="button" class="chip" data-info="about" aria-expanded="false" aria-controls="info-about">
+          <svg class="ic" aria-hidden="true" focusable="false"><use href="#i-info"/></svg>关于
+        </button>
+      </nav>
+
+      <section id="info-help" class="info" aria-labelledby="info-help-title" hidden>
+        <h3 id="info-help-title">使用说明</h3>
+        <ol>
+          <li>点“开始使用”，会打开 WPS。</li>
+          <li>在 WPS 顶部找到“办公工具箱”，先选中文字、表格或幻灯片内容，再点需要的功能。</li>
+          <li>想反复使用的文字或表格，可以存成内容卡片，到别的文档里点“插入”。</li>
+          <li>处理后不满意，用 WPS 自带的“撤销”即可。这里不会自动保存你的原文档。</li>
+          <li>想换默认字体、表头颜色，或隐藏用不到的按钮，请打开“设置”。</li>
+        </ol>
+      </section>
+
+      <section id="info-updates" class="info" aria-labelledby="info-updates-title" hidden>
+        <h3 id="info-updates-title">更新说明</h3>
+        <p>当前版本：<span class="ver-text">读取中</span>。目前可以使用：</p>
+        <ul>
+          <li>文字排版：统一字体、字号和行距，默认值可在设置里修改。</li>
+          <li>表格整理：美化表头、整理选区、删除重复行。</li>
+          <li>PPT 制作：按大纲分页，选择版式风格后制作。</li>
+          <li>内容卡片：把选中的文字或表格存下来，在其他文档里点“插入”。是否能直接拖进文档取决于 WPS，拖不进去时请用“插入”按钮。</li>
+          <li>备份：把当前文件备份到你指定的文件夹。</li>
+          <li>启动页和设置：查看运行状态，选择要显示的功能，调整默认格式，导出或导入卡片。</li>
+        </ul>
+      </section>
+
+      <section id="info-about" class="info" aria-labelledby="info-about-title" hidden>
+        <h3 id="info-about-title">关于办公工具箱</h3>
+        <p>版本：<span class="ver-text">读取中</span></p>
+        <p>办公工具箱只在这台电脑上运行。卡片、设置和备份都保存在本机；不需要联网，也不使用 AI，不会把你的文档内容发送到网上。</p>
+      </section>
+    </main>
+  </div>
+</div>
+<noscript><p class="noscript">需要开启浏览器的脚本功能，才能显示运行状态和打开 WPS。</p></noscript>
+<script src="i18n-ja.js"></script><script src="i18n-ja-extra.js"></script><script src="i18n.js"></script><script src="settings-client.js"></script><script src="start.js"></script>
+</body>
+</html>

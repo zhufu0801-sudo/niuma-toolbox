@@ -1,0 +1,76 @@
+# 自动测试：每次推送和提交 PR 时，在 Windows、Mac、Linux 上跑一遍；Mac 上再装一次、检查一次、卸载一次。
+# 这些机器上没有 WPS 和 Office，所以功能区按钮、侧栏里的操作测不到，那部分还要在真机上点。
+name: 自动测试
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  unit:
+    name: 自动测试（${{ matrix.os }}）
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, macos-latest, ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - name: Mac：准备一个临时钥匙串（不会弹出密码框）
+        if: runner.os == 'macOS'
+        run: |
+          security create-keychain -p ci-only ci.keychain
+          security set-keychain-settings ci.keychain
+          security unlock-keychain -p ci-only ci.keychain
+          security list-keychains -d user -s ci.keychain $(security list-keychains -d user | tr -d '"')
+          security default-keychain -s ci.keychain
+      - name: 系统加密（Windows DPAPI / Mac 钥匙串）
+        if: runner.os != 'Linux'
+        run: node scripts/ci/secret-check.mjs
+
+  mac-install:
+    name: Mac 安装、本机服务、卸载
+    runs-on: macos-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: 准备一个临时钥匙串（不会弹出密码框）
+        run: |
+          security create-keychain -p ci-only ci.keychain
+          security set-keychain-settings ci.keychain
+          security unlock-keychain -p ci-only ci.keychain
+          security list-keychains -d user -s ci.keychain $(security list-keychains -d user | tr -d '"')
+          security default-keychain -s ci.keychain
+      - name: 打 Mac 安装包并安装（模拟双击 install.command）
+        run: bash scripts/ci/mac-install.sh
+      - name: 检查安装结果
+        run: node scripts/ci/mac-check.mjs
+      - name: 卸载并检查
+        run: node scripts/ci/mac-check.mjs uninstall
+      - name: 保存日志和安装包（出问题时下载来看）
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mac-install-logs
+          path: |
+            ~/Library/Application Support/OfficeToolbox/app/generated/server.log
+            release/*.zip
+          if-no-files-found: ignore
+          retention-days: 7

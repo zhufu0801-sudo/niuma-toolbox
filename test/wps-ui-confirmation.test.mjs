@@ -1,0 +1,3 @@
+import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';import vm from 'node:vm';
+const code=fs.readFileSync(new URL('../public/tools/core.js',import.meta.url),'utf8');
+test('WPS 界面工具执行前确认并提示表格不能撤销，取消不修改',async()=>{let accepted=false,writes=0,message='';const c={Application:{ActiveWorkbook:{Name:'独立测试'}},location:{pathname:'/addon/et/index.html'},confirm:m=>{message=m;return accepted;},URLSearchParams};c.window=c;vm.runInNewContext(code,c);c.OfficeTools.register({id:'demo',label:'测试操作',hosts:{et:()=>{writes++;return '完成';}}});assert.equal(await c.OfficeTools.runFromUi('demo'),'已取消。');assert.equal(writes,0);assert.match(message,/Ctrl\+Z/);accepted=true;await c.OfficeTools.runFromUi('demo');assert.equal(writes,1);});

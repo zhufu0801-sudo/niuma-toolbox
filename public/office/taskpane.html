@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>办公工具箱</title>
+<link rel="stylesheet" href="../tools.css"><link rel="stylesheet" href="../formula-panel.css"><link rel="stylesheet" href="../quick-panel.css">
+<link rel="stylesheet" href="taskpane.css">
+<script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+<script src="../i18n-ja.js"></script><script src="../i18n-ja-extra.js"></script><script src="../i18n.js"></script>
+<script src="../method-cards.js"></script><script src="../quick-engine.js"></script><script src="../formula-engine.js"></script><script src="../quick-host.js"></script><script src="../quick-catalog.js"></script>
+<script src="../locale-engine.js"></script><script src="../doc-outline.js"></script><script src="office-docplus.js"></script><script src="office-keys.js"></script><script src="../sheet-logic.js"></script><script src="office-sheetplus.js"></script><script src="../proof-engine.js"></script><script src="../id-engine.js"></script><script src="office-tools.js"></script><script src="../postal-format.js"></script><script src="office-batch2.js"></script><script src="office-print.js"></script><script src="office-shim.js"></script><script src="../ai-text-panel.js" defer></script><script src="../ai-chat-panel.js" defer></script><script src="../file-tools-panel.js" defer></script>
+</head>
+<body class="office-pane">
+<header>
+  <span class="seal"><img src="../icons/toolbox.svg" alt=""></span>
+  <div><h1>办公工具箱</h1><p id="hostLine">正在连接 Office…</p></div>
+  <div class="lang" role="group" aria-label="显示语言">
+    <button type="button" data-lang="zh" lang="zh-CN" translate="no">中文</button><button type="button" data-lang="ja" lang="ja" translate="no">日本語</button>
+  </div>
+</header>
+<main>
+  <p id="status" role="status" aria-live="polite" hidden></p>
+  <div id="confirmBox" class="confirm" hidden><p id="confirmText"></p><div class="row"><button type="button" id="confirmYes" class="primary">确认执行</button><button type="button" id="confirmNo">取消</button></div></div>
+  <div id="excelPanels" hidden><section class="quick-section" hidden></section><section id="manageSection"></section></div>
+  <section id="toolSection"><h2>常用操作</h2><p class="sub">先选择要处理的内容，再点击执行。</p><ul id="tools" class="tools"></ul></section>
+  <section id="replaceForm" hidden><h2>查找替换</h2><p class="sub">只处理选区内的文字。</p><label>查找的文字<input id="findText"></label><label>替换为<input id="replaceText"></label><button type="button" id="replaceGo" class="primary">确认并替换</button></section>
+  <section id="outlineForm" hidden><h2>按大纲生成 PPT</h2><p class="sub">每页第一行是标题，下面几行是要点，空一行开始下一页。</p><textarea id="outlineText" rows="8" placeholder="项目概览&#10;目标&#10;计划&#10;&#10;下一步&#10;分工"></textarea><button type="button" id="outlineGo" class="primary">生成幻灯片</button></section>
+  <section id="cardSection"><h2>内容卡片</h2><p class="sub">和 WPS 版共用同一个卡片库：在一个文档里存，在另一个文档里插入。</p><div class="row"><button type="button" id="cardSave" class="primary">把选区存成卡片</button><button type="button" id="cardReload">刷新</button></div><p id="cardNote" class="sub" hidden></p><ul id="cardList" class="tools"></ul></section>
+  <section id="keySection" hidden><h2>快捷键</h2><p class="sub">在文档里按 Ctrl+Alt+Shift+数字，直接执行对应的工具。需要确认或出错时会打开侧栏。</p><ul id="keyList" class="keys"></ul><button type="button" id="keyReset">恢复默认</button></section>
+  <section><h2>办公方法卡</h2><input id="search" type="search" placeholder="搜索功能"><ul id="cards" class="cards"></ul></section>
+  <p class="foot">Microsoft Office 版（试用）· 在本机处理，不上传文档内容</p>
+</main>
+<script src="taskpane.js"></script>
+<script src="../mask-engine.js"></script><script src="../mask-host.js"></script><script src="../mask-clipboard.js"></script><script src="../mask-panel.js"></script><script src="../vba-lint.js"></script><script src="../vba-panel.js"></script><script src="../postal-panel.js"></script>
+<script src="../welcome.js"></script><script src="../mcp-host.js"></script><script src="../library-panel.js"></script><script src="/print-copy-panel.js"></script>
+<script src="/update-banner.js"></script>
+</body>
+</html>

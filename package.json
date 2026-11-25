@@ -1,0 +1,24 @@
+{
+  "name": "wps-ai-coach",
+  "version": "0.16.0",
+  "private": true,
+  "type": "module",
+  "description": "WPS 本地办公工具箱：直接排版、表格整理、演示制作与内容搬运",
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node --test test/*.test.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "docx": "^9.15.1",
+    "exceljs": "^4.4.0",
+    "fast-xml-parser": "^5.11.2",
+    "jszip": "^3.10.2",
+    "pdf-parse": "^2.4.5",
+    "pdfkit": "^0.20.2",
+    "pptxgenjs": "^4.0.1"
+  },
+  "license": "GPL-3.0"
+}

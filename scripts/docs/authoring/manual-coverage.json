@@ -1,0 +1,1689 @@
+[
+  {
+    "id": "approvalBox",
+    "chapter": "dates",
+    "sources": [
+      "tools/approval.js"
+    ]
+  },
+  {
+    "id": "batchPdf",
+    "chapter": "files",
+    "sources": [
+      "tools/batch.js"
+    ]
+  },
+  {
+    "id": "batchReplace",
+    "chapter": "files",
+    "sources": [
+      "tools/batch.js"
+    ]
+  },
+  {
+    "id": "batchWatermark",
+    "chapter": "files",
+    "sources": [
+      "tools/batch.js"
+    ]
+  },
+  {
+    "id": "splitByHeading",
+    "chapter": "files",
+    "sources": [
+      "tools/batch.js"
+    ]
+  },
+  {
+    "id": "sendToDoc",
+    "chapter": "files",
+    "sources": [
+      "tools/batch.js"
+    ]
+  },
+  {
+    "id": "insertToday",
+    "chapter": "dates",
+    "sources": [
+      "tools/dates.js"
+    ]
+  },
+  {
+    "id": "unifyDates",
+    "chapter": "dates",
+    "sources": [
+      "tools/dates.js"
+    ]
+  },
+  {
+    "id": "workdayCalc",
+    "chapter": "dates",
+    "sources": [
+      "tools/dates.js"
+    ]
+  },
+  {
+    "id": "dateSummary",
+    "chapter": "dates",
+    "sources": [
+      "tools/dates.js"
+    ]
+  },
+  {
+    "id": "deleteBlankPages",
+    "chapter": "word",
+    "sources": [
+      "tools/doc-plus.js"
+    ]
+  },
+  {
+    "id": "officialFormatCn",
+    "chapter": "word",
+    "sources": [
+      "tools/doc-plus.js"
+    ]
+  },
+  {
+    "id": "businessFormatJa",
+    "chapter": "word",
+    "sources": [
+      "tools/doc-plus.js"
+    ]
+  },
+  {
+    "id": "fixPageJump",
+    "chapter": "word",
+    "sources": [
+      "tools/doc-plus.js"
+    ]
+  },
+  {
+    "id": "landscapePages",
+    "chapter": "word",
+    "sources": [
+      "tools/doc-plus.js"
+    ]
+  },
+  {
+    "id": "tableBeautify",
+    "chapter": "word",
+    "sources": [
+      "tools/doc-plus.js"
+    ]
+  },
+  {
+    "id": "pictureFix",
+    "chapter": "word",
+    "sources": [
+      "tools/doc-plus.js"
+    ]
+  },
+  {
+    "id": "boldInlineHeads",
+    "chapter": "word",
+    "sources": [
+      "tools/doc-plus.js"
+    ]
+  },
+  {
+    "id": "alignOptions",
+    "chapter": "word",
+    "sources": [
+      "tools/doc-plus.js"
+    ]
+  },
+  {
+    "id": "noBreakLatin",
+    "chapter": "word",
+    "sources": [
+      "tools/doc-plus.js"
+    ]
+  },
+  {
+    "id": "removeWatermark",
+    "chapter": "word",
+    "sources": [
+      "tools/doc-plus.js"
+    ]
+  },
+  {
+    "id": "wordToPpt",
+    "chapter": "word",
+    "sources": [
+      "tools/doc-plus.js"
+    ]
+  },
+  {
+    "id": "addCjkSpace",
+    "chapter": "word",
+    "sources": [
+      "tools/doc-plus.js"
+    ]
+  },
+  {
+    "id": "removeCjkSpace",
+    "chapter": "word",
+    "sources": [
+      "tools/doc-plus.js"
+    ]
+  },
+  {
+    "id": "batchRename",
+    "chapter": "files",
+    "sources": [
+      "tools/files-more.js"
+    ]
+  },
+  {
+    "id": "insertPhrase",
+    "chapter": "dates",
+    "sources": [
+      "tools/files-more.js"
+    ]
+  },
+  {
+    "id": "saveLinkedModule",
+    "chapter": "cards",
+    "sources": [
+      "tools/links.js"
+    ]
+  },
+  {
+    "id": "insertLinkedModule",
+    "chapter": "cards",
+    "sources": [
+      "tools/links.js"
+    ]
+  },
+  {
+    "id": "updateLinkedModules",
+    "chapter": "cards",
+    "sources": [
+      "tools/links.js"
+    ]
+  },
+  {
+    "id": "rmbUpper",
+    "chapter": "dates",
+    "sources": [
+      "tools/locale.js",
+      "tools/word-plus.js"
+    ]
+  },
+  {
+    "id": "idCardInfo",
+    "chapter": "sheet",
+    "sources": [
+      "tools/locale.js"
+    ]
+  },
+  {
+    "id": "phoneCheck",
+    "chapter": "sheet",
+    "sources": [
+      "tools/locale.js"
+    ]
+  },
+  {
+    "id": "zenHan",
+    "chapter": "dates",
+    "sources": [
+      "tools/locale.js"
+    ]
+  },
+  {
+    "id": "toWareki",
+    "chapter": "dates",
+    "sources": [
+      "tools/locale.js"
+    ]
+  },
+  {
+    "id": "toSeireki",
+    "chapter": "dates",
+    "sources": [
+      "tools/locale.js"
+    ]
+  },
+  {
+    "id": "postalFormat",
+    "chapter": "postal",
+    "sources": [
+      "tools/locale.js"
+    ]
+  },
+  {
+    "id": "furigana",
+    "chapter": "sheet",
+    "sources": [
+      "tools/locale.js"
+    ]
+  },
+  {
+    "id": "postalFill",
+    "chapter": "postal",
+    "sources": [
+      "tools/postal.js"
+    ]
+  },
+  {
+    "id": "printPreflight",
+    "chapter": "print",
+    "sources": [
+      "tools/print.js"
+    ]
+  },
+  {
+    "id": "printKeepRows",
+    "chapter": "print",
+    "sources": [
+      "tools/print.js"
+    ]
+  },
+  {
+    "id": "printSheetSetup",
+    "chapter": "print",
+    "sources": [
+      "tools/print.js"
+    ]
+  },
+  {
+    "id": "sendCheck",
+    "chapter": "word",
+    "sources": [
+      "tools/proof.js"
+    ]
+  },
+  {
+    "id": "proofCheck",
+    "chapter": "word",
+    "sources": [
+      "tools/proof.js"
+    ]
+  },
+  {
+    "id": "jaStyle",
+    "chapter": "word",
+    "sources": [
+      "tools/proof.js"
+    ]
+  },
+  {
+    "id": "compareDocs",
+    "chapter": "word",
+    "sources": [
+      "tools/proof.js"
+    ]
+  },
+  {
+    "id": "exportComments",
+    "chapter": "word",
+    "sources": [
+      "tools/proof.js"
+    ]
+  },
+  {
+    "id": "captionNumbers",
+    "chapter": "word",
+    "sources": [
+      "tools/proof.js"
+    ]
+  },
+  {
+    "id": "fixListNumbering",
+    "chapter": "word",
+    "sources": [
+      "tools/proof.js"
+    ]
+  },
+  {
+    "id": "sheetCheck",
+    "chapter": "sheet",
+    "sources": [
+      "tools/sheet-check.js"
+    ]
+  },
+  {
+    "id": "wanUnit",
+    "chapter": "sheet",
+    "sources": [
+      "tools/sheet-data.js"
+    ]
+  },
+  {
+    "id": "idCheck",
+    "chapter": "sheet",
+    "sources": [
+      "tools/sheet-data.js"
+    ]
+  },
+  {
+    "id": "mergeWorkbooks",
+    "chapter": "sheet",
+    "sources": [
+      "tools/sheet-data.js"
+    ]
+  },
+  {
+    "id": "codesBatch",
+    "chapter": "sheet",
+    "sources": [
+      "tools/sheet-data.js"
+    ]
+  },
+  {
+    "id": "attendanceStats",
+    "chapter": "sheet",
+    "sources": [
+      "tools/sheet-data.js"
+    ]
+  },
+  {
+    "id": "spotlight",
+    "chapter": "sheet",
+    "sources": [
+      "tools/sheet-plus.js"
+    ]
+  },
+  {
+    "id": "bandRows",
+    "chapter": "sheet",
+    "sources": [
+      "tools/sheet-plus.js"
+    ]
+  },
+  {
+    "id": "textToNumber",
+    "chapter": "sheet",
+    "sources": [
+      "tools/sheet-plus.js"
+    ]
+  },
+  {
+    "id": "extractNumbers",
+    "chapter": "sheet",
+    "sources": [
+      "tools/sheet-plus.js"
+    ]
+  },
+  {
+    "id": "extractChinese",
+    "chapter": "sheet",
+    "sources": [
+      "tools/sheet-plus.js"
+    ]
+  },
+  {
+    "id": "extractLetters",
+    "chapter": "sheet",
+    "sources": [
+      "tools/sheet-plus.js"
+    ]
+  },
+  {
+    "id": "removeBrackets",
+    "chapter": "sheet",
+    "sources": [
+      "tools/sheet-plus.js"
+    ]
+  },
+  {
+    "id": "compareRanges",
+    "chapter": "sheet",
+    "sources": [
+      "tools/sheet-plus.js"
+    ]
+  },
+  {
+    "id": "payrollSlips",
+    "chapter": "sheet",
+    "sources": [
+      "tools/sheet-plus.js"
+    ]
+  },
+  {
+    "id": "mergedNumbering",
+    "chapter": "sheet",
+    "sources": [
+      "tools/sheet-plus.js"
+    ]
+  },
+  {
+    "id": "rankKeepOrder",
+    "chapter": "sheet",
+    "sources": [
+      "tools/sheet-plus.js"
+    ]
+  },
+  {
+    "id": "dueReminder",
+    "chapter": "sheet",
+    "sources": [
+      "tools/sheet-plus.js"
+    ]
+  },
+  {
+    "id": "progressBar",
+    "chapter": "sheet",
+    "sources": [
+      "tools/sheet-plus.js"
+    ]
+  },
+  {
+    "id": "joinColumns",
+    "chapter": "sheet",
+    "sources": [
+      "tools/sheet-plus.js"
+    ]
+  },
+  {
+    "id": "splitToRows",
+    "chapter": "sheet",
+    "sources": [
+      "tools/sheet-plus.js"
+    ]
+  },
+  {
+    "id": "stackColumns",
+    "chapter": "sheet",
+    "sources": [
+      "tools/sheet-plus.js"
+    ]
+  },
+  {
+    "id": "printTitles",
+    "chapter": "print",
+    "sources": [
+      "tools/sheet-plus.js"
+    ]
+  },
+  {
+    "id": "fitOnePageWide",
+    "chapter": "print",
+    "sources": [
+      "tools/sheet-plus.js"
+    ]
+  },
+  {
+    "id": "deleteBlankRows",
+    "chapter": "sheet",
+    "sources": [
+      "tools/sheet-plus.js"
+    ]
+  },
+  {
+    "id": "sheetIndex",
+    "chapter": "sheet",
+    "sources": [
+      "tools/sheet-plus.js"
+    ]
+  },
+  {
+    "id": "renameSheets",
+    "chapter": "sheet",
+    "sources": [
+      "tools/sheet-plus.js"
+    ]
+  },
+  {
+    "id": "splitByColumn",
+    "chapter": "sheet",
+    "sources": [
+      "tools/sheet-plus.js"
+    ]
+  },
+  {
+    "id": "mergeSheets",
+    "chapter": "sheet",
+    "sources": [
+      "tools/sheet-plus.js"
+    ]
+  },
+  {
+    "id": "exportSheets",
+    "chapter": "files",
+    "sources": [
+      "tools/sheet-plus.js"
+    ]
+  },
+  {
+    "id": "quickChart",
+    "chapter": "sheet",
+    "sources": [
+      "tools/sheet-plus.js"
+    ]
+  },
+  {
+    "id": "swapColumns",
+    "chapter": "sheet",
+    "sources": [
+      "tools/sheet-plus.js"
+    ]
+  },
+  {
+    "id": "transposeRange",
+    "chapter": "sheet",
+    "sources": [
+      "tools/sheet-plus.js"
+    ]
+  },
+  {
+    "id": "alignNames",
+    "chapter": "sheet",
+    "sources": [
+      "tools/sheet-plus.js"
+    ]
+  },
+  {
+    "id": "colorSumCount",
+    "chapter": "sheet",
+    "sources": [
+      "tools/sheet-plus.js"
+    ]
+  },
+  {
+    "id": "addPrefixSuffix",
+    "chapter": "sheet",
+    "sources": [
+      "tools/sheet-plus.js"
+    ]
+  },
+  {
+    "id": "wrapIferror",
+    "chapter": "sheet",
+    "sources": [
+      "tools/sheet-plus.js"
+    ]
+  },
+  {
+    "id": "maskData",
+    "chapter": "sheet",
+    "sources": [
+      "tools/sheet-plus.js"
+    ]
+  },
+  {
+    "id": "unitSum",
+    "chapter": "sheet",
+    "sources": [
+      "tools/sheet-plus.js"
+    ]
+  },
+  {
+    "id": "columnsForPrint",
+    "chapter": "print",
+    "sources": [
+      "tools/sheet-plus.js"
+    ]
+  },
+  {
+    "id": "listToTable",
+    "chapter": "sheet",
+    "sources": [
+      "tools/sheet-plus.js"
+    ]
+  },
+  {
+    "id": "rangeToImage",
+    "chapter": "files",
+    "sources": [
+      "tools/sheet-plus.js"
+    ]
+  },
+  {
+    "id": "picturesByName",
+    "chapter": "sheet",
+    "sources": [
+      "tools/sheet-plus.js"
+    ]
+  },
+  {
+    "id": "diagonalHeader",
+    "chapter": "word",
+    "sources": [
+      "tools/sheet-plus.js",
+      "tools/word-plus.js"
+    ]
+  },
+  {
+    "id": "formatHeader",
+    "chapter": "sheet",
+    "sources": [
+      "tools/sheet.js"
+    ]
+  },
+  {
+    "id": "fitColumns",
+    "chapter": "sheet",
+    "sources": [
+      "tools/sheet.js"
+    ]
+  },
+  {
+    "id": "wrapCells",
+    "chapter": "sheet",
+    "sources": [
+      "tools/sheet.js"
+    ]
+  },
+  {
+    "id": "filterCells",
+    "chapter": "sheet",
+    "sources": [
+      "tools/sheet.js"
+    ]
+  },
+  {
+    "id": "trimCells",
+    "chapter": "sheet",
+    "sources": [
+      "tools/sheet.js"
+    ]
+  },
+  {
+    "id": "removeDuplicates",
+    "chapter": "sheet",
+    "sources": [
+      "tools/sheet.js"
+    ]
+  },
+  {
+    "id": "replaceText",
+    "chapter": "word",
+    "sources": [
+      "tools/sheet.js",
+      "tools/word.js"
+    ]
+  },
+  {
+    "id": "centerAcross",
+    "chapter": "sheet",
+    "sources": [
+      "tools/sheet.js"
+    ]
+  },
+  {
+    "id": "shrinkToFit",
+    "chapter": "sheet",
+    "sources": [
+      "tools/sheet.js"
+    ]
+  },
+  {
+    "id": "fillBlanks",
+    "chapter": "sheet",
+    "sources": [
+      "tools/sheet.js"
+    ]
+  },
+  {
+    "id": "fitPicturesToCells",
+    "chapter": "sheet",
+    "sources": [
+      "tools/sheet.js"
+    ]
+  },
+  {
+    "id": "matchFormat",
+    "chapter": "cards",
+    "sources": [
+      "tools/sheet.js",
+      "tools/slides.js",
+      "tools/word.js"
+    ]
+  },
+  {
+    "id": "slidesToImages",
+    "chapter": "slides",
+    "sources": [
+      "tools/slides-export.js"
+    ]
+  },
+  {
+    "id": "handoutPdf",
+    "chapter": "slides",
+    "sources": [
+      "tools/slides-export.js"
+    ]
+  },
+  {
+    "id": "slimDeck",
+    "chapter": "slides",
+    "sources": [
+      "tools/slides-export.js"
+    ]
+  },
+  {
+    "id": "makeSlides",
+    "chapter": "slides",
+    "sources": [
+      "tools/slides.js"
+    ]
+  },
+  {
+    "id": "insertTable",
+    "chapter": "word",
+    "sources": [
+      "tools/slides.js",
+      "tools/word.js"
+    ]
+  },
+  {
+    "id": "formatSlide",
+    "chapter": "slides",
+    "sources": [
+      "tools/slides.js"
+    ]
+  },
+  {
+    "id": "duplicateSlide",
+    "chapter": "slides",
+    "sources": [
+      "tools/slides.js"
+    ]
+  },
+  {
+    "id": "unifyDeckFont",
+    "chapter": "slides",
+    "sources": [
+      "tools/slides.js"
+    ]
+  },
+  {
+    "id": "removeAnimations",
+    "chapter": "slides",
+    "sources": [
+      "tools/slides.js"
+    ]
+  },
+  {
+    "id": "unifyTitles",
+    "chapter": "slides",
+    "sources": [
+      "tools/slides.js"
+    ]
+  },
+  {
+    "id": "slideNumbers",
+    "chapter": "slides",
+    "sources": [
+      "tools/slides.js"
+    ]
+  },
+  {
+    "id": "bodySpacing",
+    "chapter": "slides",
+    "sources": [
+      "tools/slides.js"
+    ]
+  },
+  {
+    "id": "arrangeVisuals",
+    "chapter": "slides",
+    "sources": [
+      "tools/slides.js"
+    ]
+  },
+  {
+    "id": "applyDesign",
+    "chapter": "slides",
+    "sources": [
+      "tools/slides.js"
+    ]
+  },
+  {
+    "id": "removeNotes",
+    "chapter": "slides",
+    "sources": [
+      "tools/slides.js"
+    ]
+  },
+  {
+    "id": "saveCard",
+    "chapter": "cards",
+    "sources": [
+      "tools/transfer.js"
+    ]
+  },
+  {
+    "id": "insertCard",
+    "chapter": "cards",
+    "sources": [
+      "tools/transfer.js"
+    ]
+  },
+  {
+    "id": "capture",
+    "chapter": "cards",
+    "sources": [
+      "tools/transfer.js"
+    ]
+  },
+  {
+    "id": "insertTransfer",
+    "chapter": "cards",
+    "sources": [
+      "tools/transfer.js"
+    ]
+  },
+  {
+    "id": "insertLatest",
+    "chapter": "cards",
+    "sources": [
+      "tools/transfer.js"
+    ]
+  },
+  {
+    "id": "pasteBarCollect",
+    "chapter": "cards",
+    "sources": [
+      "tools/transfer.js"
+    ]
+  },
+  {
+    "id": "pasteBarInsert",
+    "chapter": "cards",
+    "sources": [
+      "tools/transfer.js"
+    ]
+  },
+  {
+    "id": "backupFile",
+    "chapter": "files",
+    "sources": [
+      "tools/transfer.js"
+    ]
+  },
+  {
+    "id": "exportPdf",
+    "chapter": "files",
+    "sources": [
+      "tools/transfer.js"
+    ]
+  },
+  {
+    "id": "paraNormalize",
+    "chapter": "word",
+    "sources": [
+      "tools/word-plus.js"
+    ]
+  },
+  {
+    "id": "tableOnePage",
+    "chapter": "word",
+    "sources": [
+      "tools/word-plus.js"
+    ]
+  },
+  {
+    "id": "fitOneLine",
+    "chapter": "word",
+    "sources": [
+      "tools/word-plus.js"
+    ]
+  },
+  {
+    "id": "printBigText",
+    "chapter": "print",
+    "sources": [
+      "tools/word-plus.js"
+    ]
+  },
+  {
+    "id": "photoToPrint",
+    "chapter": "word",
+    "sources": [
+      "tools/word-plus.js"
+    ]
+  },
+  {
+    "id": "signatureClean",
+    "chapter": "word",
+    "sources": [
+      "tools/word-plus.js"
+    ]
+  },
+  {
+    "id": "removeHeaderLine",
+    "chapter": "word",
+    "sources": [
+      "tools/word-plus.js"
+    ]
+  },
+  {
+    "id": "deleteAnswers",
+    "chapter": "word",
+    "sources": [
+      "tools/word-plus.js"
+    ]
+  },
+  {
+    "id": "contractSign",
+    "chapter": "word",
+    "sources": [
+      "tools/word-plus.js"
+    ]
+  },
+  {
+    "id": "tablePictureFit",
+    "chapter": "word",
+    "sources": [
+      "tools/word-plus.js"
+    ]
+  },
+  {
+    "id": "superSubscript",
+    "chapter": "word",
+    "sources": [
+      "tools/word-plus.js"
+    ]
+  },
+  {
+    "id": "alignSignature",
+    "chapter": "word",
+    "sources": [
+      "tools/word-plus.js"
+    ]
+  },
+  {
+    "id": "insertFiles",
+    "chapter": "files",
+    "sources": [
+      "tools/word-plus.js"
+    ]
+  },
+  {
+    "id": "autoBorder",
+    "chapter": "sheet",
+    "sources": [
+      "tools/word-plus.js"
+    ]
+  },
+  {
+    "id": "heading1",
+    "chapter": "word",
+    "sources": [
+      "tools/word.js"
+    ]
+  },
+  {
+    "id": "heading2",
+    "chapter": "word",
+    "sources": [
+      "tools/word.js"
+    ]
+  },
+  {
+    "id": "bodyFormat",
+    "chapter": "word",
+    "sources": [
+      "tools/word.js"
+    ]
+  },
+  {
+    "id": "toc",
+    "chapter": "word",
+    "sources": [
+      "tools/word.js"
+    ]
+  },
+  {
+    "id": "textTable",
+    "chapter": "word",
+    "sources": [
+      "tools/word.js"
+    ]
+  },
+  {
+    "id": "removeBlankParas",
+    "chapter": "word",
+    "sources": [
+      "tools/word.js"
+    ]
+  },
+  {
+    "id": "unifyPictures",
+    "chapter": "word",
+    "sources": [
+      "tools/word.js"
+    ]
+  },
+  {
+    "id": "fitPictures",
+    "chapter": "word",
+    "sources": [
+      "tools/word.js"
+    ]
+  },
+  {
+    "id": "idCardSize",
+    "chapter": "word",
+    "sources": [
+      "tools/word.js"
+    ]
+  },
+  {
+    "id": "mask-panel",
+    "chapter": "mask",
+    "sources": [
+      "public/mask-panel.js"
+    ]
+  },
+  {
+    "id": "mask-agent",
+    "chapter": "mask",
+    "sources": [
+      "public/mask-agent.js"
+    ]
+  },
+  {
+    "id": "mask-clipboard",
+    "chapter": "mask",
+    "sources": [
+      "public/mask-clipboard.js"
+    ]
+  },
+  {
+    "id": "mask-modules",
+    "chapter": "mask",
+    "sources": [
+      "public/mask-modules.js"
+    ]
+  },
+  {
+    "id": "vba-panel",
+    "chapter": "macro",
+    "sources": [
+      "public/vba-panel.js"
+    ]
+  },
+  {
+    "id": "macro-panel",
+    "chapter": "macro",
+    "sources": [
+      "public/macro-panel.js"
+    ]
+  },
+  {
+    "id": "postal-panel",
+    "chapter": "postal",
+    "sources": [
+      "public/postal-panel.js"
+    ]
+  },
+  {
+    "id": "formula-panel",
+    "chapter": "sheet",
+    "sources": [
+      "public/formula-panel.js"
+    ]
+  },
+  {
+    "id": "studio",
+    "chapter": "slides",
+    "sources": [
+      "public/studio.js"
+    ]
+  },
+  {
+    "id": "quick-selectionStats",
+    "chapter": "sheet",
+    "sources": [
+      "public/quick-selectionStats.js"
+    ]
+  },
+  {
+    "id": "quick-filterValues",
+    "chapter": "sheet",
+    "sources": [
+      "public/quick-filterValues.js"
+    ]
+  },
+  {
+    "id": "quick-unmergeFill",
+    "chapter": "sheet",
+    "sources": [
+      "public/quick-unmergeFill.js"
+    ]
+  },
+  {
+    "id": "quick-mergeSame",
+    "chapter": "sheet",
+    "sources": [
+      "public/quick-mergeSame.js"
+    ]
+  },
+  {
+    "id": "quick-dropdown",
+    "chapter": "sheet",
+    "sources": [
+      "public/quick-dropdown.js"
+    ]
+  },
+  {
+    "id": "quick-preventDuplicates",
+    "chapter": "sheet",
+    "sources": [
+      "public/quick-preventDuplicates.js"
+    ]
+  },
+  {
+    "id": "quick-cleanInvisible",
+    "chapter": "sheet",
+    "sources": [
+      "public/quick-cleanInvisible.js"
+    ]
+  },
+  {
+    "id": "quick-groupSummary",
+    "chapter": "sheet",
+    "sources": [
+      "public/quick-groupSummary.js"
+    ]
+  },
+  {
+    "id": "quick-clearConstants",
+    "chapter": "sheet",
+    "sources": [
+      "public/quick-clearConstants.js"
+    ]
+  },
+  {
+    "id": "quick-uniqueCount",
+    "chapter": "sheet",
+    "sources": [
+      "public/quick-uniqueCount.js"
+    ]
+  },
+  {
+    "id": "quick-textIds",
+    "chapter": "sheet",
+    "sources": [
+      "public/quick-textIds.js"
+    ]
+  },
+  {
+    "id": "quick-readingGuide",
+    "chapter": "sheet",
+    "sources": [
+      "public/quick-readingGuide.js"
+    ]
+  },
+  {
+    "id": "quick-renameGuide",
+    "chapter": "sheet",
+    "sources": [
+      "public/quick-renameGuide.js"
+    ]
+  },
+  {
+    "id": "quick-pivotGuide",
+    "chapter": "sheet",
+    "sources": [
+      "public/quick-pivotGuide.js"
+    ]
+  },
+  {
+    "id": "pdf-merge",
+    "chapter": "files",
+    "sources": [
+      "public/pdf-merge.js"
+    ]
+  },
+  {
+    "id": "pdf-pick",
+    "chapter": "files",
+    "sources": [
+      "public/pdf-pick.js"
+    ]
+  },
+  {
+    "id": "pdf-remove",
+    "chapter": "files",
+    "sources": [
+      "public/pdf-remove.js"
+    ]
+  },
+  {
+    "id": "pdf-split",
+    "chapter": "files",
+    "sources": [
+      "public/pdf-split.js"
+    ]
+  },
+  {
+    "id": "pdf-to-images",
+    "chapter": "files",
+    "sources": [
+      "public/pdf-to-images.js"
+    ]
+  },
+  {
+    "id": "pdf-images-to-pdf",
+    "chapter": "files",
+    "sources": [
+      "public/pdf-images-to-pdf.js"
+    ]
+  },
+  {
+    "id": "ocrImage",
+    "chapter": "files"
+  },
+  {
+    "id": "pdfToWord",
+    "chapter": "files"
+  },
+  {
+    "id": "extractImages",
+    "chapter": "files"
+  },
+  {
+    "id": "compressImages",
+    "chapter": "files"
+  },
+  {
+    "id": "docHistory",
+    "chapter": "files"
+  },
+  {
+    "id": "mail-merge-panel",
+    "chapter": "files"
+  },
+  {
+    "id": "fax-cover",
+    "chapter": "print"
+  },
+  {
+    "id": "address-labels",
+    "chapter": "print"
+  },
+  {
+    "id": "envelope",
+    "chapter": "print"
+  },
+  {
+    "id": "vertical",
+    "chapter": "print"
+  },
+  {
+    "id": "shipping",
+    "chapter": "print"
+  },
+  {
+    "id": "print-copy-panel",
+    "chapter": "print"
+  },
+  {
+    "id": "stamp",
+    "chapter": "print"
+  },
+  {
+    "id": "impose",
+    "chapter": "print"
+  },
+  {
+    "id": "library-panel",
+    "chapter": "dates"
+  },
+  {
+    "id": "aiChat",
+    "chapter": "ai"
+  },
+  {
+    "id": "aiSummary",
+    "chapter": "ai"
+  },
+  {
+    "id": "aiContinue",
+    "chapter": "ai"
+  },
+  {
+    "id": "aiExpand",
+    "chapter": "ai"
+  },
+  {
+    "id": "aiShorten",
+    "chapter": "ai"
+  },
+  {
+    "id": "aiBullets",
+    "chapter": "ai"
+  },
+  {
+    "id": "aiFormal",
+    "chapter": "ai"
+  },
+  {
+    "id": "aiTranslate",
+    "chapter": "ai"
+  },
+  {
+    "id": "ai-formula",
+    "chapter": "ai"
+  },
+  {
+    "id": "mcE01",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcE02",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcE03",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcE04",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcE05",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcE06",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcE07",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcE08",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcE09",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcE10",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcE11",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcE12",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcE13",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcE14",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcE15",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcE16",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcE17",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcE18",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcE19",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcE20",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcE21",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcE22",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcE23",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcE24",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcE25",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcE26",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcE27",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcE28",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcW01",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcW02",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcW03",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcW04",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcW05",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcW06",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcW07",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcW08",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcW09",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcW10",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcW11",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcW12",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcW13",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcW14",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcW15",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcW16",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcW17",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcW18",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcW19",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcW20",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcW21",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcW22",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcW23",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcW24",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcW25",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcW26",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcW27",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcW28",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcW29",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcO01",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcO02",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcO03",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcO04",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcO05",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcO06",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcO07",
+    "chapter": "appendix",
+    "kind": "guide"
+  },
+  {
+    "id": "mcO08",
+    "chapter": "appendix",
+    "kind": "guide"
+  }
+]

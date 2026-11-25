@@ -1,0 +1,32 @@
+:root{--field:#858f9c;--ink:#1f2a44;--muted:#5d6878;--paper:#fff;--desk:#eef1ec;--rule:#d9ded6;--seal:#b8361f;--ok:#2e7457;--ok-bg:#e6f2eb;--err:#a8442a;--err-bg:#fbebe4;font:13px/1.6 "Segoe UI","Microsoft YaHei UI","Yu Gothic UI",sans-serif;color:var(--ink);background:var(--desk)}
+html[lang=ja]{font-family:"Segoe UI","Yu Gothic UI","Meiryo UI",sans-serif}
+*{box-sizing:border-box}body.office-pane{margin:0;padding:0;background:var(--desk);max-width:none}
+header{display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--paper);border-bottom:2px solid var(--ink)}
+.seal{width:30px;height:30px;flex:none;display:grid;place-items:center;background:var(--seal);border-radius:4px}.seal img{width:18px;height:18px;filter:brightness(0) invert(1)}
+h1{margin:0;font-size:15px}header p{margin:0;font-size:12px;color:var(--muted)}header>div:nth-child(2){flex:1;min-width:0}
+.lang{display:flex;border:1px solid var(--rule);border-radius:4px;overflow:hidden}.lang button{border:0;background:none;padding:3px 7px;font-size:12px;cursor:pointer;color:var(--muted)}.lang button[aria-pressed=true]{background:#f3e58a;color:var(--ink);font-weight:600}
+main{padding:10px 14px 20px}section{margin:14px 0}h2{margin:0 0 4px;font-size:14px}.sub{margin:0 0 8px;color:var(--muted);font-size:12px}
+.tools,.cards{list-style:none;margin:0;padding:0}
+.tools li{display:flex;align-items:center;gap:8px;padding:8px 10px;margin:0 0 6px;background:var(--paper);border:1px solid var(--rule);border-radius:5px}
+.tools li div{flex:1;min-width:0}.tools b{display:block;font-size:13px}.tools span{font-size:12px;color:var(--muted)}
+button{font:inherit;color:inherit;cursor:pointer}.tools button,.row button{padding:5px 10px;border:1px solid var(--rule);border-radius:4px;background:var(--paper)}
+.primary,.tools button{background:var(--ink)!important;border-color:var(--ink)!important;color:#fff}
+button:disabled{opacity:.5;cursor:wait}button:focus-visible,input:focus-visible{outline:2px solid #2b5797;outline-offset:2px}
+#status{margin:0 0 8px;padding:8px 10px;background:var(--ok-bg);border-left:3px solid var(--ok);white-space:pre-line}#status.error{background:var(--err-bg);border-left-color:var(--err);color:var(--err)}
+.confirm{margin:0 0 10px;padding:10px;background:#fbf1df;border-left:3px solid #9a5a12;white-space:pre-line}.confirm p{margin:0 0 8px}.row{display:flex;gap:8px}
+input[type=search]{width:100%;padding:6px 8px;margin:0 0 8px;border:1px solid var(--field);border-radius:4px;font:inherit}
+.cards details{margin:0 0 6px;background:var(--paper);border:1px solid var(--rule);border-radius:5px;padding:7px 10px}.cards summary{cursor:pointer;font-weight:600}.cards p{margin:6px 0 0;font-size:12px}.cards .note{color:var(--muted)}.cards a{color:#2b5797}
+.foot{margin-top:18px;font-size:11px;color:var(--muted)}
+label{display:block;margin:6px 0;font-size:12px;color:var(--muted)}label input{display:block;width:100%;margin-top:3px;padding:6px 8px;border:1px solid var(--field);border-radius:4px;font:inherit;color:var(--ink)}
+textarea{width:100%;padding:6px 8px;border:1px solid var(--field);border-radius:4px;font:inherit;margin-bottom:8px}
+#replaceForm .primary,#outlineForm .primary{padding:6px 12px;border-radius:4px;border:1px solid var(--ink)}
+#excelPanels .tool-card{margin:12px 0}
+#manageSection:empty{display:none}
+#cardSection .row button{white-space:nowrap}
+#cardSection .row .primary{flex:1}
+#cardReload{flex:none;padding-inline:14px}
+#confirmNo{flex:none;white-space:nowrap}
+#cardList{margin-top:8px}
+
+.keys{list-style:none;margin:0 0 8px;padding:0}.keys li{margin:0 0 4px}.keys label{display:flex;align-items:center;gap:8px}.keys kbd{flex:none;font-family:inherit;font-size:11px;line-height:1.7;white-space:nowrap;padding:1px 6px;border:1px solid var(--rule);border-bottom-width:2px;border-radius:4px;background:var(--paper);text-align:center}.keys select{flex:1;min-width:0}
+.cards .one-click{margin:8px 8px 0 0}

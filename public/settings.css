@@ -1,0 +1,55 @@
+/* 设置页：白纸上的一张表单，每组设置一段，保存栏固定在底部。 */
+:root{--field:#858f9c;
+  --ink:#1f2a44;--ink-soft:#3a4660;--muted:#5d6878;--faint:#7d8794;
+  --paper:#fff;--desk:#eef1ec;--rule:#d9ded6;--rule-soft:#e8ebe5;--hover:#f5f7f3;
+  --seal:#b8361f;--ok:#2e7457;--ok-bg:#e6f2eb;--err:#a8442a;--err-bg:#fbebe4;
+  font:14px/1.65 "Segoe UI","Microsoft YaHei UI","Microsoft YaHei","PingFang SC",sans-serif;
+  color:var(--ink);background:var(--desk);accent-color:var(--ink)
+}
+html[lang=ja] .setting-row>label{flex-basis:190px}
+html[lang=ja]{font-family:"Segoe UI","Yu Gothic UI","Meiryo UI","Meiryo","Hiragino Sans",sans-serif}
+*{box-sizing:border-box}body{margin:0;background:var(--desk)}
+main{max-width:760px;margin:28px auto;padding:22px 30px 0;background:var(--paper);border:1px solid var(--rule);border-radius:8px}
+h1{display:flex;align-items:center;gap:12px;margin:14px 0 0;font-size:24px;font-weight:700}
+.seal{width:36px;height:36px;flex:none;display:grid;place-items:center;background:var(--seal);border-radius:5px;box-shadow:inset 0 0 0 2px #ffffff40}.seal img{width:20px;height:20px;filter:brightness(0) invert(1)}
+h2{margin:0 0 6px;font-size:16px;font-weight:700}
+p{margin:4px 0 12px;font-size:13px;color:var(--muted)}
+a{color:#2b5797}
+fieldset{min-width:0;margin:0;padding:0;border:0}
+section{padding:22px 0;border-top:1px solid var(--rule)}
+.setting-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px 12px;margin:10px 0}
+.setting-row>label{flex:0 0 150px;font-size:13px;color:var(--ink-soft)}
+.setting-row>input:not([type=color]):not([type=checkbox]),.setting-row>select{flex:1;min-width:150px}
+.setting-row button{padding:5px 10px;font-size:12px;color:var(--muted)}
+input,select,button,.button{font:inherit;color:inherit}
+input:not([type=checkbox]),select{padding:7px 9px;background:var(--paper);border:1px solid var(--field);border-radius:4px}
+input:focus,select:focus{outline:none;border-color:#2b5797;box-shadow:0 0 0 2px #2b579722}
+input[type=color]{width:72px;height:36px;padding:3px}
+input[type=checkbox]{width:16px;height:16px;margin:0}
+button,.button{padding:7px 13px;background:var(--paper);border:1px solid var(--rule);border-radius:4px;color:var(--ink-soft);cursor:pointer;text-decoration:none}
+button:hover,.button:hover{background:var(--hover)}
+.primary{background:var(--ink);border-color:var(--ink);color:#fff;font-weight:600}
+.primary:hover{background:#2b385a}
+.danger{color:var(--err)}
+button:disabled{opacity:.5;cursor:wait}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid #2b5797;outline-offset:2px}
+.features{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2px 16px;margin:10px 0 14px}
+.features label{display:flex;align-items:center;gap:8px;padding:5px 0;font-size:13px}
+.actions{display:flex;flex-wrap:wrap;gap:8px}
+.save-bar{position:sticky;bottom:0;z-index:2;display:flex;align-items:center;gap:10px;margin:0 -30px;padding:14px 30px;background:var(--paper);border-top:2px solid var(--ink)}
+.save-bar span{flex:1;font-size:12px;color:var(--muted)}
+#message{margin:14px 0 18px;padding:10px 14px;font-size:13px;color:var(--ok);background:var(--ok-bg);border-left:3px solid var(--ok);overflow-wrap:anywhere}
+#message.error{color:var(--err);background:var(--err-bg);border-left-color:var(--err)}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+@media(max-width:800px){main{margin:0;border:0;border-radius:0}}
+@media(max-width:500px){main{padding:16px 16px 0}.features{grid-template-columns:1fr}.setting-row>label,html[lang=ja] .setting-row>label{flex-basis:100%}.save-bar{flex-wrap:wrap;margin:0 -16px;padding:12px 16px}.save-bar span{flex-basis:100%}}
+#aiMessage:empty{display:none}#aiMessage{margin:8px 0;padding:8px 12px;font-size:13px;color:var(--ok);background:var(--ok-bg);border-left:3px solid var(--ok)}#aiMessage.error{color:var(--err);background:var(--err-bg);border-left-color:var(--err)}
+.ai-settings{margin:0 0 24px}.ai-help{font-weight:600;color:var(--ink-soft)}#aiKeyLink{font-size:13px}
+/* 功能开关分组（2026-11-20） */
+#features{display:block;margin:10px 0 14px}
+.feature-group{border:1px solid #d9dee5;border-radius:8px;padding:6px 12px;margin:0 0 8px}
+.feature-group summary{cursor:pointer;font-weight:600;padding:6px 0;font-size:14px}
+.feature-group .features{margin:6px 0 8px}
+.feature-bar{display:flex;gap:8px;margin:4px 0}
+.feature-bar button{font-size:12px;padding:4px 10px}
+.help-links{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;margin:10px 0}

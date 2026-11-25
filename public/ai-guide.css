@@ -1,0 +1,15 @@
+:root{--ink:#1f2a44;--soft:#3a4660;--muted:#5d6878;--rule:#d9ded6;--desk:#eef1ec;--seal:#b8361f;--note:#fff6e5;font:15px/1.75 "Segoe UI","Microsoft YaHei UI","Microsoft YaHei","PingFang SC",sans-serif;color:var(--ink);background:var(--desk)}
+html[lang=ja]{font-family:"Segoe UI","Yu Gothic UI","Meiryo",sans-serif}
+*{box-sizing:border-box}body{margin:0}main{max-width:860px;margin:24px auto;padding:20px 32px 40px;background:#fff;border:1px solid var(--rule);border-radius:8px}
+header{display:flex;justify-content:space-between;align-items:center;gap:12px}header a{color:#2b5797;text-decoration:none;font-size:14px}
+.lang button{font:inherit;font-size:13px;padding:4px 10px;border:1px solid var(--rule);background:#fff;cursor:pointer}.lang button[aria-pressed=true]{background:var(--ink);color:#fff;border-color:var(--ink)}
+h1{font-size:26px;margin:18px 0 6px}h2{font-size:19px;margin:30px 0 8px;padding-top:18px;border-top:1px solid var(--rule)}h3{font-size:16px;margin:0}
+p{margin:6px 0 10px;color:var(--soft)}.lead{font-size:16px;color:var(--soft)}
+.pick{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:12px 0}.pick div{border:1px solid var(--rule);border-radius:6px;padding:12px 14px}.pick b{display:block;margin-bottom:4px}.pick span{font-size:13px;color:var(--muted)}
+ol.steps{padding-left:22px}ol.steps li{margin:6px 0}
+.provider{border:1px solid var(--rule);border-radius:6px;padding:14px 18px;margin:12px 0}.provider .top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.provider a.go{display:inline-block;background:var(--ink);color:#fff;text-decoration:none;padding:6px 14px;border-radius:4px;font-size:14px;font-weight:600}
+.provider ol{margin:8px 0 4px;padding-left:22px}.provider .meta{font-size:13px;color:var(--muted)}.provider code,p code{background:#f2f4f1;padding:1px 6px;border-radius:3px;font-size:13px}
+.note{background:var(--note);border-left:3px solid #c68a12;padding:10px 14px;margin:12px 0;font-size:14px}
+.faq dt{font-weight:700;margin-top:12px}.faq dd{margin:2px 0 0;color:var(--soft)}
+@media(max-width:700px){main{margin:0;border:0;padding:16px}.pick{grid-template-columns:1fr}}

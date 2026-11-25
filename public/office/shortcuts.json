@@ -1,0 +1,116 @@
+{
+  "actions": [
+    {
+      "id": "toolbox.k1",
+      "type": "ExecuteFunction",
+      "name": "快捷键 1（ショートカット 1）"
+    },
+    {
+      "id": "toolbox.k2",
+      "type": "ExecuteFunction",
+      "name": "快捷键 2（ショートカット 2）"
+    },
+    {
+      "id": "toolbox.k3",
+      "type": "ExecuteFunction",
+      "name": "快捷键 3（ショートカット 3）"
+    },
+    {
+      "id": "toolbox.k4",
+      "type": "ExecuteFunction",
+      "name": "快捷键 4（ショートカット 4）"
+    },
+    {
+      "id": "toolbox.k5",
+      "type": "ExecuteFunction",
+      "name": "快捷键 5（ショートカット 5）"
+    },
+    {
+      "id": "toolbox.k6",
+      "type": "ExecuteFunction",
+      "name": "快捷键 6（ショートカット 6）"
+    },
+    {
+      "id": "toolbox.k7",
+      "type": "ExecuteFunction",
+      "name": "快捷键 7（ショートカット 7）"
+    },
+    {
+      "id": "toolbox.k8",
+      "type": "ExecuteFunction",
+      "name": "快捷键 8（ショートカット 8）"
+    },
+    {
+      "id": "toolbox.k9",
+      "type": "ExecuteFunction",
+      "name": "快捷键 9（ショートカット 9）"
+    },
+    {
+      "id": "toolbox.k0",
+      "type": "ExecuteFunction",
+      "name": "快捷键 0（ショートカット 0）"
+    }
+  ],
+  "shortcuts": [
+    {
+      "action": "toolbox.k1",
+      "key": {
+        "default": "Ctrl+Alt+Shift+1"
+      }
+    },
+    {
+      "action": "toolbox.k2",
+      "key": {
+        "default": "Ctrl+Alt+Shift+2"
+      }
+    },
+    {
+      "action": "toolbox.k3",
+      "key": {
+        "default": "Ctrl+Alt+Shift+3"
+      }
+    },
+    {
+      "action": "toolbox.k4",
+      "key": {
+        "default": "Ctrl+Alt+Shift+4"
+      }
+    },
+    {
+      "action": "toolbox.k5",
+      "key": {
+        "default": "Ctrl+Alt+Shift+5"
+      }
+    },
+    {
+      "action": "toolbox.k6",
+      "key": {
+        "default": "Ctrl+Alt+Shift+6"
+      }
+    },
+    {
+      "action": "toolbox.k7",
+      "key": {
+        "default": "Ctrl+Alt+Shift+7"
+      }
+    },
+    {
+      "action": "toolbox.k8",
+      "key": {
+        "default": "Ctrl+Alt+Shift+8"
+      }
+    },
+    {
+      "action": "toolbox.k9",
+      "key": {
+        "default": "Ctrl+Alt+Shift+9"
+      }
+    },
+    {
+      "action": "toolbox.k0",
+      "key": {
+        "default": "Ctrl+Alt+Shift+0"
+      }
+    }
+  ]
+}

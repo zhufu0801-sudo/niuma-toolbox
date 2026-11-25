@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>WPS AI 操作教练</title><link rel="stylesheet" href="style.css"></head>
+<body><main class="coach">
+  <header class="topbar"><img src="coach.svg" width="35" height="35" alt=""><div><h1>操作教练</h1><p>把想做的事，变成会做的事。</p></div><span class="local-badge">本机 AI</span></header>
+  <div class="coach-content">
+  <div class="preview-note"><a href="workspace.html" target="_blank" rel="noopener">打开内容工作台 → Word / PPT / Excel / PDF</a></div>
+  <div class="connection" id="connection" role="status"><span class="dot"></span><span id="modelStatus">正在连接 DeepSeek…</span><button id="recheck" class="text-button" title="重新检查模型连接">检查</button></div>
+  <div class="preview-note" id="previewNote" hidden>浏览器预览 · 在 WPS 中打开后可读取当前选择。</div>
+  <nav class="host-tabs" aria-label="办公应用"><button data-host="wps">文字</button><button data-host="et">表格</button><button data-host="wpp">PPT</button></nav>
+  <section class="context-card"><div class="section-label"><span>当前操作位置</span><button id="refreshContext" class="text-button">刷新</button></div><h2 id="contextTitle">等待打开文档</h2><p id="contextDetail">选中文字、单元格或幻灯片，再问我怎么做。</p><details><summary>查看选中内容</summary><pre id="contextPreview">暂未读取到选中内容。</pre></details></section>
+  <section class="recommendations"><div class="section-heading"><h2 id="suggestionTitle">从一个小操作开始</h2><span>随选区更新</span></div><div id="suggestions"></div></section>
+  <section class="conversation" aria-label="指导内容" aria-live="polite"><div class="empty-state" id="emptyState"><span class="spark">✦</span><h2>你操作，我在旁边指导</h2><p>试着告诉我你想达到的效果。<br>我会拆成一步一步的菜单操作。</p></div><div id="messages"></div></section>
+  </div>
+  <footer class="composer"><div class="composer-options"><label><input type="checkbox" id="includeContext" checked> 结合当前选中内容</label><button class="text-button" id="clearChat">清空对话</button></div><form id="askForm"><label class="sr-only" for="question">你想做什么</label><textarea id="question" rows="2" maxlength="2000" placeholder="例如：怎么把这段文字做成自动目录？"></textarea><div class="composer-bottom"><span>DeepSeek R1 · 本地运行</span><button type="submit" id="sendButton" aria-label="获取操作指导">开始指导 <span>↗</span></button></div></form><p class="privacy">点击提问后，仅把问题与勾选的内容交给本机模型。</p></footer>
+</main><script src="guides.js"></script><script src="host.js"></script><script src="app.js"></script></body></html>

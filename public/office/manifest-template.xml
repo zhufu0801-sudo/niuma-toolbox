@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 办公工具箱 · Microsoft Office 插件清单模板。安装脚本把 {{ID}}、{{BASE}}、{{VERSION}} 换成实际值后写到 app\office\manifest.xml。
+     {{REQUIREMENTS}}、{{RUNTIMES}}、{{EXTENDED}} 是快捷键（共享运行时）用的：检测到 Microsoft 365 版本够新才填入，否则替换为空，旧版 Office 不受影响。 -->
+<OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0" xmlns:ov="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="TaskPaneApp">
+  <Id>{{ID}}</Id>
+  <Version>{{VERSION}}</Version>
+  <ProviderName>OfficeToolbox</ProviderName>
+  <DefaultLocale>zh-CN</DefaultLocale>
+  <DisplayName DefaultValue="办公工具箱"><Override Locale="ja-JP" Value="オフィスツールボックス"/></DisplayName>
+  <Description DefaultValue="本机处理的办公小工具：表格整理、图片排版、办公方法卡。"><Override Locale="ja-JP" Value="このパソコン内で動くオフィス用ツール：表の整理、画像のレイアウト、テクニック集。"/></Description>
+  <IconUrl DefaultValue="{{BASE}}/office/icon-32.png"/>
+  <HighResolutionIconUrl DefaultValue="{{BASE}}/office/icon-80.png"/>
+  <SupportUrl DefaultValue="{{BASE}}/office/taskpane.html"/>
+  <AppDomains><AppDomain>{{BASE}}</AppDomain></AppDomains>
+  <Hosts><Host Name="Workbook"/><Host Name="Document"/><Host Name="Presentation"/></Hosts>
+  {{REQUIREMENTS}}
+  <DefaultSettings><SourceLocation DefaultValue="{{BASE}}/office/taskpane.html"/></DefaultSettings>
+  <Permissions>ReadWriteDocument</Permissions>
+  <VersionOverrides xmlns="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="VersionOverridesV1_0">
+    <Hosts>
+      <Host xsi:type="Workbook">
+        {{RUNTIMES}}
+        <DesktopFormFactor>
+          <ExtensionPoint xsi:type="PrimaryCommandSurface">
+            <CustomTab id="OfficeToolbox.Tab">
+              <Group id="OfficeToolbox.Group">
+                <Label resid="Group.Label"/>
+                <Icon><bt:Image size="16" resid="Icon.16"/><bt:Image size="32" resid="Icon.32"/><bt:Image size="80" resid="Icon.80"/></Icon>
+                <Control xsi:type="Button" id="OfficeToolbox.Open">
+                  <Label resid="Open.Label"/>
+                  <Supertip><Title resid="Open.Label"/><Description resid="Open.Tip"/></Supertip>
+                  <Icon><bt:Image size="16" resid="Icon.16"/><bt:Image size="32" resid="Icon.32"/><bt:Image size="80" resid="Icon.80"/></Icon>
+                  <Action xsi:type="ShowTaskpane"><TaskpaneId>OfficeToolboxPane</TaskpaneId><SourceLocation resid="Taskpane.Url"/></Action>
+                </Control>
+              </Group>
+              <Label resid="Tab.Label"/>
+            </CustomTab>
+          </ExtensionPoint>
+        </DesktopFormFactor>
+      </Host>
+      <Host xsi:type="Document">
+        {{RUNTIMES}}
+        <DesktopFormFactor>
+          <ExtensionPoint xsi:type="PrimaryCommandSurface">
+            <CustomTab id="OfficeToolbox.Tab">
+              <Group id="OfficeToolbox.Group">
+                <Label resid="Group.Label"/>
+                <Icon><bt:Image size="16" resid="Icon.16"/><bt:Image size="32" resid="Icon.32"/><bt:Image size="80" resid="Icon.80"/></Icon>
+                <Control xsi:type="Button" id="OfficeToolbox.Open">
+                  <Label resid="Open.Label"/>
+                  <Supertip><Title resid="Open.Label"/><Description resid="Open.Tip"/></Supertip>
+                  <Icon><bt:Image size="16" resid="Icon.16"/><bt:Image size="32" resid="Icon.32"/><bt:Image size="80" resid="Icon.80"/></Icon>
+                  <Action xsi:type="ShowTaskpane"><TaskpaneId>OfficeToolboxPane</TaskpaneId><SourceLocation resid="Taskpane.Url"/></Action>
+                </Control>
+              </Group>
+              <Label resid="Tab.Label"/>
+            </CustomTab>
+          </ExtensionPoint>
+        </DesktopFormFactor>
+      </Host>
+      <Host xsi:type="Presentation">
+        {{RUNTIMES}}
+        <DesktopFormFactor>
+          <ExtensionPoint xsi:type="PrimaryCommandSurface">
+            <CustomTab id="OfficeToolbox.Tab">
+              <Group id="OfficeToolbox.Group">
+                <Label resid="Group.Label"/>
+                <Icon><bt:Image size="16" resid="Icon.16"/><bt:Image size="32" resid="Icon.32"/><bt:Image size="80" resid="Icon.80"/></Icon>
+                <Control xsi:type="Button" id="OfficeToolbox.Open">
+                  <Label resid="Open.Label"/>
+                  <Supertip><Title resid="Open.Label"/><Description resid="Open.Tip"/></Supertip>
+                  <Icon><bt:Image size="16" resid="Icon.16"/><bt:Image size="32" resid="Icon.32"/><bt:Image size="80" resid="Icon.80"/></Icon>
+                  <Action xsi:type="ShowTaskpane"><TaskpaneId>OfficeToolboxPane</TaskpaneId><SourceLocation resid="Taskpane.Url"/></Action>
+                </Control>
+              </Group>
+              <Label resid="Tab.Label"/>
+            </CustomTab>
+          </ExtensionPoint>
+        </DesktopFormFactor>
+      </Host>
+    </Hosts>
+    <Resources>
+      <bt:Images>
+        <bt:Image id="Icon.16" DefaultValue="{{BASE}}/office/icon-16.png"/>
+        <bt:Image id="Icon.32" DefaultValue="{{BASE}}/office/icon-32.png"/>
+        <bt:Image id="Icon.80" DefaultValue="{{BASE}}/office/icon-80.png"/>
+      </bt:Images>
+      <bt:Urls><bt:Url id="Taskpane.Url" DefaultValue="{{BASE}}/office/taskpane.html"/></bt:Urls>
+      <bt:ShortStrings>
+        <bt:String id="Tab.Label" DefaultValue="办公工具箱"><bt:Override Locale="ja-JP" Value="ツールボックス"/></bt:String>
+        <bt:String id="Group.Label" DefaultValue="工具箱"><bt:Override Locale="ja-JP" Value="ツールボックス"/></bt:String>
+        <bt:String id="Open.Label" DefaultValue="打开工具箱"><bt:Override Locale="ja-JP" Value="ツールボックスを開く"/></bt:String>
+      </bt:ShortStrings>
+      <bt:LongStrings>
+        <bt:String id="Open.Tip" DefaultValue="打开办公工具箱侧栏：一键工具和办公方法卡。"><bt:Override Locale="ja-JP" Value="ツールボックスのサイドバーを開きます：ワンクリックツールとテクニック集。"/></bt:String>
+      </bt:LongStrings>
+    </Resources>
+  </VersionOverrides>
+  {{EXTENDED}}
+</OfficeApp>

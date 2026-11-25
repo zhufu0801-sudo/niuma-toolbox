@@ -1,0 +1,9 @@
+(function(root){
+ 'use strict';var data=null,token=null,loading=null,legacyReader=null,listeners=[],pending=Promise.resolve();
+ function notify(){listeners.forEach(function(fn){try{fn(data);}catch(ignore){}});try{root.dispatchEvent(new CustomEvent('office-settings-changed'));}catch(ignore){}}
+ async function request(url,method,body,retry){if(!token){var session=await fetch('/api/session',{cache:'no-store'}).then(function(r){return r.json();});token=session.token;}var response=await fetch(url,{method:method||'GET',cache:'no-store',headers:{'Content-Type':'application/json','X-Coach-Token':token},body:body===undefined?undefined:JSON.stringify(body)});if(response.status===403&&!retry){token=null;return request(url,method,body,true);}var result=await response.json();if(!response.ok)throw Error(result.error||'设置暂时无法保存，请稍后重试。');return result;}
+ async function refresh(){if(loading)return loading;loading=(async function(){var next=await request('/api/settings');if(!next.initialized&&legacyReader){var legacy=legacyReader();next=await request('/api/settings/migrate','POST',legacy||{ids:[]});}var changed=!data||next.revision!==data.revision;data=next;if(changed)notify();return data;})().finally(function(){loading=null;});return loading;}
+ function update(patch){var result=pending.catch(function(){}).then(async function(){await refresh();var next=await request('/api/settings','POST',{patch:patch,expectedRevision:data.revision});data=next;notify();return data;});pending=result;return result;}
+ root.WorkbenchSettings={ready:refresh,refresh:refresh,update:update,snapshot:function(){return data;},legacy:function(reader){legacyReader=reader;},subscribe:function(fn){listeners.push(fn);}};
+ if(typeof setInterval==='function')setInterval(function(){refresh().catch(function(){});},2000);
+})(window);
