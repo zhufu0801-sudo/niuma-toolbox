@@ -50,7 +50,7 @@ test('Office 快捷键：十个键位、默认工具都存在、清单只在够�
   const ctx={};ctx.window=ctx;vm.runInNewContext(read('office/office-docplus.js')+'\n'+read('sheet-logic.js')+'\n'+read('office/office-sheetplus.js')+'\n'+read('office/office-tools.js')+'\n'+read('office/office-keys.js'),ctx);
   for(const host of ['word','excel','powerpoint']){const ids=new Set(ctx.OfficeAddinTools.list(host).map(x=>x.id));ids.add('openPane');for(const [k,id] of Object.entries(ctx.OfficeKeys.DEFAULTS[host]))assert.ok(ids.has(id),host+' '+k+' '+id);}
   const assoc=[];ctx.OfficeKeys.associate({actions:{associate:(n,f)=>assoc.push(n)}},'word',()=>{});assert.deepEqual([...assoc],sc.actions.map(a=>a.id));
-  const tpl=read('office/manifest-template.xml');for(const k of ['{{REQUIREMENTS}}','{{RUNTIMES}}','{{EXTENDED}}'])assert.ok(tpl.includes(k),k);assert.equal(tpl.split('{{RUNTIMES}}\n        <DesktopFormFactor>').length-1,3);
+  const tpl=read('office/manifest-template.xml');for(const k of ['{{REQUIREMENTS}}','{{RUNTIMES}}','{{EXTENDED}}'])assert.ok(tpl.includes(k),k);assert.equal((tpl.match(/\{\{RUNTIMES\}\}\r?\n        <DesktopFormFactor>/g)||[]).length,3);
   const ps=fs.readFileSync(new URL('../scripts/package/Initialize.ps1',import.meta.url),'utf8');
   assert.match(ps,/shortcuts = \(\$build -ge 17928\)/);assert.match(ps,/\.Replace\('\{\{REQUIREMENTS\}\}', ''\)\.Replace\('\{\{RUNTIMES\}\}', ''\)\.Replace\('\{\{EXTENDED\}\}', ''\)/);assert.match(ps,/\[switch\]\$NoOfficeShortcuts/);
 });

@@ -19,3 +19,13 @@ test('Mac 上 API Key 存进钥匙串：ai.json 只留编号，读取时从钥�
   const again=createSecretBox({platform:'darwin',keychain});assert.equal(await again.unprotect(r.value,'keychain'),'sk-mac-secret');
   await assert.rejects(again.unprotect('kc-missing','keychain'),/钥匙串里找不到/);await assert.rejects(again.unprotect('abc','dpapi'),/Windows 上加密/);assert.equal(await again.unprotect('plain','none'),'plain');
 });
+
+test('Mac keychain round-trips Unicode across instances without confusing legacy hex-looking keys',async()=>{
+ const {createSecretBox}=await import('../lib/secret.mjs');const store=new Map([['kc-legacy','deadbeef']]);
+ const keychain=async args=>{const id=args[args.indexOf('-a')+1];if(args[0]==='add-generic-password'){store.set(id,args[args.indexOf('-w')+1]);return '';}const raw=store.get(id);if(raw===undefined)throw Error('missing');return /[^\x20-\x7e]/.test(raw)?Buffer.from(raw,'utf8').toString('hex'):raw;};
+ for(const plain of ['sk-测试-123','秘密🔐\n末尾\n','deadbeef']){
+  const sealed=await createSecretBox({platform:'darwin',keychain}).protect(plain);
+  assert.equal(await createSecretBox({platform:'darwin',keychain}).unprotect(sealed.value,sealed.protection),plain);
+ }
+ assert.equal(await createSecretBox({platform:'darwin',keychain}).unprotect('kc-legacy','keychain'),'deadbeef');
+});

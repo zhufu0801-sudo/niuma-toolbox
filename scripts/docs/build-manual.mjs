@@ -11,7 +11,7 @@ const ROOT=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../..');
 const ai=process.argv.indexOf('--out'),OUT=path.resolve(ai>=0?process.argv[ai+1]:path.join(ROOT,'release/docs'));
 fs.mkdirSync(OUT,{recursive:true});
 const FONTDIR=process.env.WINDIR?path.join(process.env.WINDIR,'Fonts'):'';
-import {fontSpec,MISSING_FONT_EXIT} from './manual-fonts.mjs';
+import {fontSpec,glyphFont,MISSING_FONT_EXIT} from './manual-fonts.mjs';
 import checks from './manual-checks.cjs';
 const title={zh:'办公工具箱详细使用说明书',ja:'オフィスツールボックス 詳細操作ガイド',en:'Office Toolbox Detailed User Manual'};
 const tocTitle={zh:'自动目录',ja:'自動目次',en:'Automatic contents'};
@@ -25,7 +25,7 @@ function parse(md){const lines=md.split(/\r?\n/),blocks=[];let anchor=null;
   let p=[s];i++;while(i<lines.length&&lines[i].trim()&&!/^(?:#|<a |\||\*\*|\d+\. |[-*] )/.test(lines[i].trim()))p.push(lines[i++].trim());blocks.push({type:'para',text:strip(p.join(' '))});
  }return blocks;}
 function symbolSpec(fallback){for(const file of [path.join(FONTDIR,'seguisym.ttf'),'/System/Library/Fonts/Apple Symbols.ttf']){if(fs.existsSync(file)){const font=fontkit.openSync(file);return {file,face:undefined,name:font.familyName,font};}}return fallback;}
-function fontRuns(text,fonts,bold=false){const a=bold?fonts.bold:fonts.body,b=bold?fonts.fallbackBold:fonts.fallback;let chunks=[],cur='',last=null;for(const c of text){const cp=c.codePointAt(0),f=cp<32?a:[a,b,fonts.symbols].find(f=>f.font.hasGlyphForCodePoint(cp));if(!f)throw Error('Missing glyph '+c+' U+'+cp.toString(16));if(last&&f!==last){chunks.push({text:cur,spec:last});cur='';}cur+=c;last=f;}if(cur)chunks.push({text:cur,spec:last});return chunks;}
+function fontRuns(text,fonts,bold=false){const a=bold?fonts.bold:fonts.body,b=bold?fonts.fallbackBold:fonts.fallback;let chunks=[],cur='',last=null;for(const c of text){const cp=c.codePointAt(0),f=cp<32?a:glyphFont(cp,[a,b,fonts.symbols]);if(last&&f!==last){chunks.push({text:cur,spec:last});cur='';}cur+=c;last=f;}if(cur)chunks.push({text:cur,spec:last});return chunks;}
 function wordRuns(text,fonts,bold=false){return fontRuns(text,fonts,bold).map(r=>new TextRun({text:r.text,font:{name:r.spec.name,eastAsia:r.spec.name},bold,color:'000000'}));}
 function wordPara(block,fonts){let children=wordRuns(block.text,fonts,block.type==='label');if(block.anchor)children=[new Bookmark({id:block.anchor,children})];if(block.target)children=[new InternalHyperlink({anchor:block.target,children:wordRuns(block.text,fonts)})];return new Paragraph({children,spacing:{after:block.type==='label'?50:35,line:250},keepNext:block.type==='label',widowControl:true});}
 const border={style:BorderStyle.SINGLE,size:4,color:'D9D9D9'};

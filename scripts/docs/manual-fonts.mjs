@@ -3,6 +3,11 @@ import path from 'node:path';
 import {createRequire} from 'node:module';
 const fontkit=createRequire(import.meta.url)('fontkit');
 export const MISSING_FONT_EXIT=78;
+export function glyphFont(codePoint,fonts){
+ const found=fonts.find(spec=>spec.font.hasGlyphForCodePoint(codePoint));
+ if(!found)throw Object.assign(Error('Missing glyph '+String.fromCodePoint(codePoint)+' U+'+codePoint.toString(16)),{code:'MANUAL_FONT_MISSING'});
+ return found;
+}
 export function fontCandidates(lang,bold=false,{platform=process.platform,env=process.env}={}){
  const dir=env.WINDIR?path.join(env.WINDIR,'Fonts'):'';
  const chinese=platform==='win32'?[[path.join(dir,bold?'msyhbd.ttc':'msyh.ttc'),bold?'MicrosoftYaHei-Bold':'MicrosoftYaHei','Microsoft YaHei']]:[

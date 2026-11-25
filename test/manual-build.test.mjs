@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import {fontCandidates,fontSpec,MISSING_FONT_EXIT} from '../scripts/docs/manual-fonts.mjs';
+import {fontCandidates,fontSpec,glyphFont,MISSING_FONT_EXIT} from '../scripts/docs/manual-fonts.mjs';
 import {prepareManuals} from '../scripts/package/manuals.mjs';
 import checks from '../scripts/docs/manual-checks.cjs';
 
@@ -45,4 +45,10 @@ test('missing font uses preserved PDFs even if failed generation wrote partial f
   const fromRepo=prepareManuals({root,out:path.join(root,'repo-only'),run,warn:()=>{}});
   assert.equal(fromRepo.fallback,true);assert.deepEqual(fs.readFileSync(path.join(fromRepo.directory,'manual-ja.pdf')),pdf);
  }finally{fs.rmSync(root,{recursive:true,force:true});}
+});
+
+test('missing CJK glyph is a font failure eligible for the preserved-PDF fallback',()=>{
+ const absent={font:{hasGlyphForCodePoint:()=>false}},present={font:{hasGlyphForCodePoint:cp=>cp===0x301c}};
+ assert.equal(glyphFont(0x301c,[absent,present]),present);
+ assert.throws(()=>glyphFont(0x301c,[absent]),{code:'MANUAL_FONT_MISSING'});
 });
