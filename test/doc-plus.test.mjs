@@ -39,7 +39,15 @@ test('删除空白页：只删空白页上的空段落和分页符，内容页�
   const T=bridge(a);const r=await T.run('deleteBlankPages',{host:'wps'});
   assert.match(T.asked[0],/第 2 页/);
   assert.deepEqual(P.map(p=>p.text),['第一页正文\r','\f\r','第三页正文\r']);
-  assert.match(r,/已删除 2 处.*原来共 3 页，空白的是第 2 页/);
+  assert.match(r,/已删除 2 处空段落或分页符。现在共 2 页（原来 3 页）。WPS 底部状态栏的页数有时不会马上更新，以这里为准。$/);
+});
+test('删除空白页：先让 WPS 重新分页再数页；数出来没变少（还是旧页数）时只报告原来的情况',async()=>{
+  let m=wordDoc(['第一页正文\r','\f\r','\r','\f\r','第三页正文\r']);let repaginated=0,refreshed=0;
+  m.d.Repaginate=()=>{repaginated++;};m.d.ComputeStatistics=k=>k===2?m.d.Content.Information(4):0;m.a.ScreenRefresh=()=>{refreshed++;};
+  assert.match(await bridge(m.a).run('deleteBlankPages',{host:'wps'}),/现在共 2 页（原来 3 页）/);assert.equal(repaginated,1);assert.equal(refreshed,1);
+  m=wordDoc(['第一页正文\r','\f\r','\r','\f\r','第三页正文\r']);m.d.ComputeStatistics=()=>3;
+  const r=await bridge(m.a).run('deleteBlankPages',{host:'wps'});
+  assert.match(r,/^已删除 2 处空段落或分页符。原来共 3 页，空白的是第 2 页。WPS 底部状态栏的页数有时不会马上更新，可以滚动到文末确认。$/);
 });
 test('删除空白页：文末两个 Ctrl+Enter（含空格）删掉，保留最终段落标记',async()=>{
  const m=wordDoc(['正文\r',' \f\r','\f\r']);

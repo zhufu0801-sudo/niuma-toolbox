@@ -47,6 +47,22 @@ test('表格功能区常用三项只显示一份，后部入口仍可见',()=>{
  for(const id of ['officeGroup','printGroup'])assert.ok(xml.indexOf('id="'+id+'"')<xml.indexOf('id="fileGroup"'));
 });
 
+test('文字功能区：常用组已有的按钮后面不重复，公文 / 日文商务各显示一份，文字排版收成一个菜单',()=>{
+ const w=openWorld({host:'wps'});
+ for(const id of ['deleteBlankPages','proofCheck','jaStyle','bodyFormat']){assert.equal(w.ribbon.GetVisible({Id:id}),false,id);assert.equal(w.ribbon.GetVisible({Id:'cw_'+id}),true,'cw_'+id);}
+ assert.equal(w.ribbon.GetVisible({Id:'officialFormatCn'}),false);assert.equal(w.ribbon.GetVisible({Id:'cw_officialFormatCn'}),true);
+ assert.equal(w.ribbon.GetVisible({Id:'businessFormatJa'}),true);assert.equal(w.ribbon.GetVisible({Id:'cw_businessFormatJa'}),false);
+ for(const id of ['wordGroup','docGroup','dataMask','macroCheck','heading1','toc'])assert.equal(w.ribbon.GetVisible({Id:id}),true,id);
+ const xml=fs.readFileSync(new URL('../public/ribbon.xml',import.meta.url),'utf8');
+ assert.doesNotMatch(xml,/<group id="wordGroup"/);assert.match(xml,/<group id="docGroup"[^>]*><menu id="wordGroup"[^>]*size="large"/);
+ const ids=[...xml.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);assert.equal(new Set(ids).size,ids.length);
+});
+
+test('完成提示窗自己画边框和顶部色条（WPS 小窗口没有边框，白底压在白文档上像透明）',()=>{
+ const css=fs.readFileSync(new URL('../public/notice.css',import.meta.url),'utf8');
+ assert.match(css,/html\{[^}]*border:1px solid #[0-9a-f]{6}[^}]*border-top:4px solid/);assert.match(css,/box-sizing:border-box/);
+});
+
 test('ribbon: first click creates the pane on the requested view',async()=>{
   const w=openWorld();
   w.ribbon.OnAction({Id:'makeSlides'});await flush();

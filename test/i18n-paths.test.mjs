@@ -22,3 +22,11 @@ test('WPS 工具失败提示逐段翻译，日文错误不会夹带中文前后�
   await w.testRun('idCheck');assert.match(els.status.textContent,/完了しませんでした：右隣/);assert.match(els.status.textContent,/元に戻せない/);assert.doesNotMatch(els.status.textContent,/未完成|如已出现|撤销/);
   assert.equal(w.OfficeI18n.t('（Office 版给出操作步骤）'),'（Office 版では操作手順を表示）');
 });
+
+test('删除空白页的新提示（现在页数 / 状态栏可能没刷新）有日文',()=>{
+  const w={localStorage:{getItem:()=> 'ja'},navigator:{language:'ja'},setTimeout(){},setInterval(){}};w.window=w;for(const f of ['i18n-ja.js','i18n-ja-extra.js','i18n.js'])vm.runInNewContext(fs.readFileSync(new URL('../public/'+f,import.meta.url),'utf8'),w);
+  const t=w.OfficeI18n.t;
+  assert.equal(t('已删除 2 处空段落或分页符。现在共 1 页（原来 3 页）。WPS 底部状态栏的页数有时不会马上更新，以这里为准。'),'空の段落または改ページを 2 個削除しました。現在 1 ページです（削除前は 3 ページ）。WPS 下部のステータスバーのページ数はすぐに更新されないことがあります。こちらの数字が正しい値です。');
+  const r=t('已删除 2 处空段落或分页符，并缩小了文末空段落。原来共 3 页，空白的是第 2、3 页。WPS 底部状态栏的页数有时不会马上更新，可以滚动到文末确认。');
+  assert.match(r,/^空の段落または改ページを 2 個削除しました。文末の空の段落も最小にしました。削除前は全 3 ページで、空白は .+ページ目でした。WPS 下部のステータスバー.+文末までスクロールして確認してください。$/);assert.doesNotMatch(r,/[页状态栏确认]/);
+});

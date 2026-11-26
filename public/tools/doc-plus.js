@@ -29,6 +29,7 @@
     return {total:total,blank:blank,items:items};
   }
   function touches(it,blank,total){for(var p=it.sp;p<=it.ep;p++)if(blank.indexOf(p)>=0)return true;if(it.breaks){for(var q=it.sp+1;q<=total;q++)if(blank.indexOf(q)<0)return false;return it.sp<total;}return false;}
+  function recount(a,d){try{if(typeof d.Repaginate==='function')d.Repaginate();}catch(ignore){}try{if(a&&typeof a.ScreenRefresh==='function')a.ScreenRefresh();}catch(ignore){}var n=0;try{n=Number(d.ComputeStatistics(2))||0;}catch(ignore){}if(!n){try{n=Number(d.Content.Information(4))||0;}catch(ignore){}}return n;}
   function shrink(r){r.Font.Size=1;var f=r.ParagraphFormat;f.SpaceBefore=0;f.SpaceAfter=0;f.LineSpacingRule=4;f.LineSpacing=1;}
   function deleteBlankPages(c){
     var a=c.a,d=c.d;if(d.TrackRevisions)throw Error('文档开着“修订”，请先关闭修订再删除空白页。');
@@ -41,8 +42,12 @@
     if(position(a,'wps',active(a,'wps'))!==target)throw Error('当前文档已切换，请重新执行。');
     del.sort(function(x,y){return y.start-x.start;}).forEach(function(it){d.Range(it.start,it.end).Delete();});
     if(fix){var ps=d.Paragraphs;shrink(R(d,ps.Item(Number(ps.Count))));}
-    // 删除后 WPS 异步重新分页，马上再数页会读到旧页数（真机测试发现），所以只报告原来的情况。
-    return '已删除 '+del.length+' 处空段落或分页符'+(fix?'，并缩小了文末空段落':'')+'。原来共 '+scan.total+' 页，空白的是第 '+scan.blank.join('、')+' 页；请看一下状态栏的页数确认。';
+    // 删除后 WPS 异步重新分页，马上再数页会读到旧页数（真机测试发现）；状态栏的“页面 1/3”也可能一直不刷新（2026-11-26 录视频时发现）。
+    // 先让 WPS 重新分页再数：数出来比原来少才报告现在的页数，否则只报告原来的情况，并说明状态栏可能没刷新。
+    var now=recount(a,d);
+    var head='已删除 '+del.length+' 处空段落或分页符'+(fix?'，并缩小了文末空段落':'')+'。';
+    if(now>0&&now<scan.total)return head+'现在共 '+now+' 页（原来 '+scan.total+' 页）。WPS 底部状态栏的页数有时不会马上更新，以这里为准。';
+    return head+'原来共 '+scan.total+' 页，空白的是第 '+scan.blank.join('、')+' 页。WPS 底部状态栏的页数有时不会马上更新，可以滚动到文末确认。';
   }
 
   // ---------- 公文格式（GB/T 9704-2012）和日文商务文书格式 ----------
