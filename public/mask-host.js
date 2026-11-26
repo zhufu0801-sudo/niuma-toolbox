@@ -36,7 +36,7 @@ function wpsWord(a){var d=a.ActiveDocument;if(!d)throw Error(M('请先打开一�
    wordStories(d).forEach(function(st){wordParas(st.range,'st'+st.type+'#'+st.idx,null,null,out,LIMIT);});return out;},
   // 选中范围以外的不改（段落比选区大时）
   inside:function(seg,h){return seg.lo==null||(seg.start+h.start>=seg.lo&&seg.start+h.end<=seg.hi);},
-  write:function(seg,edits){return eachDesc(edits,function(e){var r=seg.range.Duplicate;r.SetRange(seg.start+e.start,seg.start+e.end);if(txt(r.Text)!==e.expect)return false;r.Text=e.text;return true;});},
+  write:function(seg,edits){return eachDesc(edits,function(e){var base=n(seg.range.Start),r=seg.range.Duplicate;r.SetRange(base+e.start,base+e.end);if(txt(r.Text)!==e.expect)return false;r.Text=e.text;return true;});},
   copy:function(path){var fmt;try{fmt=d.SaveFormat;}catch(e){fmt=undefined;}if(fmt!==undefined&&fmt!==null)d.SaveAs2(path,fmt);else d.SaveAs2(path);},
   prepare:function(copied){var note='';try{d.TrackRevisions=false;}catch(ignore){}var rc=0;try{rc=n(d.Revisions.Count);}catch(ignore){}if(rc){if(!copied)throw Error(M('文档里还有 '+rc+' 处没接受的修订（删掉的原文还在修订里）。请先接受或拒绝全部修订，或者用“另存副本”方式脱敏。','未処理の変更履歴が '+rc+' 件あります（削除した元の文字が履歴に残っています）。先にすべて承諾・元に戻すか、「コピーを保存」でマスキングしてください。'));try{d.Revisions.AcceptAll();note=M('副本里接受了全部修订（'+rc+' 处），删掉的原文不会留在修订里。','コピーでは変更履歴（'+rc+' 件）をすべて承諾し、削除された元の文字が残らないようにしました。');}catch(e){throw Error(M('没能接受文档里的修订，请先手动“接受所有修订”再脱敏。','変更履歴を承諾できませんでした。先に手動で「すべての変更を反映」してからマスキングしてください。'));}}return note;},
   clean:function(){return cleanProps(d);},

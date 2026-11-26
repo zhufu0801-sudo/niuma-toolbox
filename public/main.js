@@ -1,17 +1,24 @@
 (function(){
-  'use strict';var pane,busy=false,SWITCH_WAIT=1500;
+  'use strict';var pane,busy=false,SWITCH_WAIT=1500,currentView='quick';
   var RIBBON=window.OfficeRibbonText||{};
+  var statusOwner='',statusLanguage='';
+  function documentKey(){try{var a=OfficeTools.app(),h=OfficeTools.host(),d=h==='et'?a.ActiveWorkbook:h==='wpp'?a.ActivePresentation:a.ActiveDocument;return h+'|'+String(d.FullName||d.Name);}catch(ignore){return '';}}
+  function clearStaleStatus(){if(statusOwner&&(statusOwner!==documentKey()||statusLanguage!==lang())){try{OfficeTools.app().StatusBar=false;}catch(ignore){}statusOwner='';}}
+  if(typeof setInterval==='function')setInterval(clearStaleStatus,500);
+  if(window.OfficeI18n&&OfficeI18n.onChange)OfficeI18n.onChange(clearStaleStatus);
   // WPS 功能区主页面里 window.alert 是只读的，翻译不能靠改写它，提示统一走 say()。
   function say(message){var i=window.OfficeI18n;return i&&typeof i.alert==='function'?i.alert(message):alert(message);}
   // 成功提示：WPS 的 alert 只有黄色警告图标（2026-11-20 客户体验 P3），改用带绿色对勾的小窗口；打不开时再用 alert。
-  function done(message){var text=String(message||'');try{var a=OfficeTools.app();if(a&&typeof a.ShowDialog==='function'&&text.length<=3000){var lines=text.split('\n').length,h=Math.min(460,170+lines*22);a.ShowDialog(location.origin+'/notice.html?msg='+encodeURIComponent(text),t('办公工具箱'),460,h,true);return;}}catch(ignore){}var i=window.OfficeI18n;return i&&typeof i.done==='function'?i.done(text):say(text);}
+  function done(message){var text=String(message||'');try{var a=OfficeTools.app();if(a&&typeof a.ShowDialog==='function'&&text.length<=3000){var lines=text.split('\n').length,h=Math.min(460,170+lines*22);a.ShowDialog(location.origin+'/notice.html?msg='+encodeURIComponent(text),t('办公工具箱'),460,h,true,true,0,'',10000,true,false,true);return;}}catch(ignore){}var i=window.OfficeI18n;return i&&typeof i.done==='function'?i.done(text):say(text);}
   function t(text){return window.OfficeI18n?OfficeI18n.t(text):text;}
+  // TaskPane has no writable title API. Recreate only on an actual language change.
+  if(window.OfficeI18n&&OfficeI18n.onChange)OfficeI18n.onChange(function(){if(!pane)return;try{var visible=pane.Visible;pane.Delete();pane=null;if(visible)create(currentView);}catch(ignore){pane=null;}});
   // 「常用工具」组里按程序放的常用按钮：id 前面加 cw_（文字）/ ce_（表格）/ cp_（演示），文字、图标、动作都用原来那个按钮的（2026-11-25）。
   var COMMON_HOST={cw:'wps',ce:'et',cp:'wpp'};
   function baseId(id){return String(id||'').replace(/^c[wep]_/,'');}
   function lang(){try{return window.OfficeI18n?OfficeI18n.lang():'zh';}catch(ignore){return 'zh';}}
   function fav(id){return /^fav[1-6]$/.test(String(id||''))&&window.QuickFavorites?QuickFavorites.slot(id):null;}
-  window.GetLabel=function(control){var f=fav(control&&control.Id);if(f)return t(f.label);var e=RIBBON[baseId(control&&control.Id)];return e&&e.label?t(e.label):'';};
+  window.GetLabel=function(control){var f=fav(control&&control.Id);if(f)return t(f.label);var e=RIBBON[control&&control.Id==='sheetCompactGroup'?'sheetGroup':baseId(control&&control.Id)];return e&&e.label?t(e.label):'';};
   window.GetScreentip=function(control){var f=fav(control&&control.Id);if(f)return t(f.desc)+(f.action?'':t('（打开操作指引）'));var e=RIBBON[baseId(control&&control.Id)];return e&&e.tip?t(e.tip):'';};
   // 侧栏里开关功能后，功能区按钮跟着显示或隐藏：定时比较开关的修改时间，有变化就刷新功能区。
   var ribbon=null,prefsAt=0;
@@ -20,7 +27,7 @@
   // getImage 只在第一次显示选项卡时调用；WPS 先于本机服务启动时图标也会是“?”，重启 WPS 即可。
   window.OnAddinLoad=function(ui){ribbon=ui||null;if(OfficeTools.startLinkWatch)OfficeTools.startLinkWatch();try{prefsAt=OfficeTools.prefsStamp?OfficeTools.prefsStamp():0;}catch(ignore){}if(window.OfficeI18n&&ribbon&&typeof ribbon.Invalidate==='function')OfficeI18n.onChange(function(){try{ribbon.Invalidate();}catch(ignore){}});if(ribbon&&typeof ribbon.Invalidate==='function'&&typeof setInterval==='function')setInterval(function(){try{var at=OfficeTools.prefsStamp();if(at!==prefsAt){prefsAt=at;ribbon.Invalidate();}}catch(ignore){}},2000);try{OfficeTools.reportHost();}catch(ignore){}return true;};window.OnAddInLoad=window.OnAddinLoad;
   window.GetImage=function(control){var id=control&&control.Id;if(/^fav[1-6]$/.test(String(id||''))){var f=fav(id);return f&&f.action?ToolIcons.forAction(f.action):f?'icons/cards.svg':'icons/star.svg';}return ToolIcons.forAction(baseId(id));};
-  window.GetVisible=function(control){var h=OfficeTools.host(),id=control.Id;var cm=/^(c[wep])_(.+)$/.exec(id);if(cm){if(COMMON_HOST[cm[1]]!==h)return false;if(cm[2]==='officialFormatCn')return lang()!=='ja';if(cm[2]==='businessFormatJa')return lang()==='ja';try{return !(OfficeTools.isHidden&&OfficeTools.isHidden(cm[2]));}catch(ignore){return true;}}if(id==='studioOpen')return h!=='wpp'&&!(OfficeTools.isHidden&&OfficeTools.isHidden(id));if(id==='printKeepRows')return h==='wps';if(id==='printSheetSetup')return h==='et';if(id==='wordGroup'||id==='docGroup')return h==='wps';if(/^fav[1-6]$/.test(id))return !!fav(id);if(id==='favHint'){try{return !(window.QuickFavorites&&QuickFavorites.favorites(h).length);}catch(ignore){return true;}}if(id==='sheetGroup'||id==='sheetPlusGroup')return h==='et';if(id==='batchReplace'||id==='batchWatermark'||id==='splitByHeading')return h==='wps';if(id==='slideGroup'||id==='slideOutGroup')return h==='wpp';if(id==='proofGroup')return h==='wps';if(id==='sheetDataGroup')return h==='et';if(id==='mailMergeOpen')return h==='wps'&&!(OfficeTools.isHidden&&OfficeTools.isHidden(id));var only={dateSummary:['et'],unifyDates:['et','wps'],approvalBox:['et','wps']}[id];if(only&&only.indexOf(h)<0)return false;try{return !(OfficeTools.isHidden&&OfficeTools.isHidden(id));}catch(ignore){return true;}};
+  window.GetVisible=function(control){var h=OfficeTools.host(),id=control.Id;if(id==='sheetCompactGroup')return h==='et';var cm=/^(c[wep])_(.+)$/.exec(id);if(cm){if(COMMON_HOST[cm[1]]!==h)return false;if(cm[2]==='officialFormatCn')return lang()!=='ja';if(cm[2]==='businessFormatJa')return lang()==='ja';try{return !(OfficeTools.isHidden&&OfficeTools.isHidden(cm[2]));}catch(ignore){return true;}}if(id==='studioOpen')return h!=='wpp'&&!(OfficeTools.isHidden&&OfficeTools.isHidden(id));if(id==='printKeepRows')return h==='wps';if(id==='printSheetSetup')return h==='et';if(id==='wordGroup'||id==='docGroup')return h==='wps';if(/^fav[1-6]$/.test(id))return !!fav(id);if(id==='favHint'){try{return !(window.QuickFavorites&&QuickFavorites.favorites(h).length);}catch(ignore){return true;}}if(h==='et'&&['spotlight','sheetCheck','formulaOpen'].indexOf(id)>=0)return false;if(id==='sheetGroup'||id==='sheetPlusGroup')return h==='et';if(id==='batchReplace'||id==='batchWatermark'||id==='splitByHeading')return h==='wps';if(id==='slideGroup'||id==='slideOutGroup')return h==='wpp';if(id==='proofGroup')return h==='wps';if(id==='sheetDataGroup')return h==='et';if(id==='mailMergeOpen')return h==='wps'&&!(OfficeTools.isHidden&&OfficeTools.isHidden(id));var only={dateSummary:['et'],unifyDates:['et','wps'],approvalBox:['et','wps']}[id];if(only&&only.indexOf(h)<0)return false;try{return !(OfficeTools.isHidden&&OfficeTools.isHidden(id));}catch(ignore){return true;}};
   function paneKey(){return 'officeTools.paneId.'+OfficeTools.host();}
   function paneUrl(view){return location.origin+'/tools.html?host='+OfficeTools.host()+'&view='+PaneBridge.view(view);}
   function remember(p){try{OfficeTools.app().PluginStorage.setItem(paneKey(),String(p.ID));}catch(ignore){}}
@@ -29,7 +36,7 @@
   // 侧栏已存在则只显示出来；已被关闭或失效则返回 false，由调用方重新创建。
   function show(){if(!pane)pane=recall();if(!pane)return false;try{pane.Visible=true;return true;}catch(ignore){pane=null;return false;}}
   function open(view){
-    view=PaneBridge.view(view);
+    view=PaneBridge.view(view);currentView=view;
     if(!show()){create(view);return Promise.resolve();}
     return PaneBridge.request(view,SWITCH_WAIT).then(function(switched){if(!switched)throw Error('工具侧栏已显示，但页面切换暂未响应。已保留填写内容，请点击侧栏顶部的“常用 / 制作 / 文件”标签。');});
   }
@@ -71,9 +78,9 @@
       try{open(id==='openCards'?'cards':id==='makeSlides'||id==='insertTable'?'create':'quick').then(null,function(e){say(e.message);});}catch(e){say(e.message);}
       return true;
     }
-    if(busy)return true;busy=true;
+    if(busy)return true;busy=true;var actionOwner=documentKey();
     fresh().then(function(ok){if(!ok){busy=false;return;}
-    OfficeTools.runFromUi(id).then(function(message){try{OfficeTools.app().StatusBar=t(message);}catch(ignore){}if(id==='capture'||id==='pasteBarCollect'||id==='saveCard'||id==='exportPdf'||id==='insertTransfer'||id==='insertLatest'||id==='backupFile'||id==='saveLinkedModule'||id==='updateLinkedModules'||docfix(id)||/^(没有|当前选区没有|选区内没有)/.test(String(message)))(/^(没有|当前选区没有|选区内没有)/.test(String(message))?say:done)(message);},function(e){var pre=/^(请|选区|当前|没有|两边|表头|这个|已有一个|按 Ctrl|“)/.test(String(e.message));say('未完成：'+e.message+(pre?'':OfficeTools.host()==='et'?'\n如表格已有部分更改，请检查内容；表格中由工具写入的内容可能无法用撤销恢复。':'\n如文档已有部分更改，可使用 WPS 自带的撤销按钮。'));}).then(function(){busy=false;});
+    OfficeTools.runFromUi(id).then(function(message){try{if(actionOwner===documentKey()){OfficeTools.app().StatusBar=t(message);statusOwner=actionOwner;statusLanguage=lang();}}catch(ignore){}if(id==='capture'||id==='pasteBarCollect'||id==='saveCard'||id==='exportPdf'||id==='insertTransfer'||id==='insertLatest'||id==='backupFile'||id==='saveLinkedModule'||id==='updateLinkedModules'||docfix(id)||/^(没有|当前选区没有|选区内没有)/.test(String(message)))(/^(没有|当前选区没有|选区内没有)/.test(String(message))?say:done)(message);},function(e){var pre=/^(请|选区|当前|没有|两边|表头|这个|已有一个|按 Ctrl|“)/.test(String(e.message));say('未完成：'+e.message+(pre?'':OfficeTools.host()==='et'?'\n如表格已有部分更改，请检查内容；表格中由工具写入的内容可能无法用撤销恢复。':'\n如文档已有部分更改，可使用 WPS 自带的撤销按钮。'));}).then(function(){busy=false;});
     });
     return true;
   };

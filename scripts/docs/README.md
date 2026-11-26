@@ -18,4 +18,4 @@ node scripts/docs/authoring/write-manuals.cjs
 
 打包先在临时目录生成说明书。仅在缺少本机 CJK 字体（生成器退出码 78）时，优先使用 `release/docs`，其次使用仓库 `docs/manual/prebuilt` 中已有的中文、日文 PDF，并输出警告；其他生成错误仍会中止。没有可用的现成 PDF 也会明确报错。修改手册后，请把生成的中日 PDF 更新到 `docs/manual/prebuilt`，用于不上传 `release/` 的 GitHub 构建。可通过 `MANUAL_FONT` 和 `MANUAL_FONT_NAME` 指定已安装字体。
 
-Windows 的成功构建与模拟缺字体测试不代表 macOS 已验证。发布到 GitHub 后还需在 macOS runner 上实际执行 Mac 打包；本次未执行该步骤。
+Windows 的成功构建与模拟缺字体测试不代表 macOS 已验证。每次发布前，须确认对应代码提交的 GitHub Actions「自动测试」和「打 Mac 安装包」成功；具体运行链接记入当次验收记录。Mac runner 的打包、安装测试不代表 Mac 上的 WPS / Microsoft Office 功能已实测。

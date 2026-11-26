@@ -2,6 +2,8 @@ import test from 'node:test';import assert from 'node:assert/strict';import vm f
 const code=fs.readFileSync(new URL('../public/i18n.js',import.meta.url),'utf8');
 function load(){const w={OfficeI18nJa:{'已备份到：':'バックアップしました：','办公工具箱':'オフィスツールボックス','报告':'レポート'},localStorage:{getItem:()=> 'ja',setItem(){}},navigator:{language:'ja'},setInterval(){},setTimeout(){}};w.window=w;vm.runInNewContext(code,w);return w.OfficeI18n;}
 test('日文状态提示保留 Windows、UNC 和 Mac 路径原文',()=>{const I=load();for(const p of ['C:\\办公工具箱\\报告 1.docx','\\\\server\\报告.docx','/Users/test/办公工具箱/报告.docx'])assert.equal(I.t('已备份到：'+p),'バックアップしました：'+p);});
+
+test('没有目录项的提示使用日文',()=>{const w={localStorage:{getItem:()=> 'ja'},navigator:{language:'ja'},setTimeout(){},setInterval(){}};w.window=w;for(const f of ['i18n-ja.js','i18n-ja-extra.js','i18n.js'])vm.runInNewContext(fs.readFileSync(new URL('../public/'+f,import.meta.url),'utf8'),w);assert.equal(w.OfficeI18n.t('没有找到目录项。'),'目次に追加できる見出しが見つかりませんでした。');assert.equal(w.OfficeI18n.t('未完成：未找到一至三级标题，请先把章节设为标题。\n如文档已有部分更改，可使用 WPS 自带的撤销按钮。'),'完了しませんでした：見出し 1～3 が見つかりません。先に章を見出しにしてください。\n途中まで変更された場合は、WPS の「元に戻す」ボタンが使えます。');});
 test('Office 动态加入日文字典后，已缓存的分段翻译也能使用新句子',()=>{const I=load();I.t('已备份到：x');I.extend({'备份的是最近一次保存的内容。':'最後に保存した内容をバックアップしました。'});assert.equal(I.t('已备份到：C:\\报告.docx\n备份的是最近一次保存的内容。'),'バックアップしました：C:\\报告.docx\n最後に保存した内容をバックアップしました。');});
 test('多行消息里的路径不会变成 undefined（真实词典，逐行再翻译）',()=>{
   const w={localStorage:{getItem:()=>'ja',setItem(){}},navigator:{language:'ja'},location:{search:'?lang=ja'},document:{documentElement:{},addEventListener(){},querySelectorAll:()=>[]},MutationObserver:function(){this.observe=()=>{};},setInterval(){},setTimeout(){}};w.window=w;

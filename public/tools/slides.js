@@ -26,7 +26,7 @@
   function textBox(slide,left,top,w,h,text,font,size,color,bold){var box=slide.Shapes.AddTextbox(1,left,top,w,h),range=box.TextFrame.TextRange;range.Text=text;range.Font.Name=font;range.Font.Size=size;if(bold)range.Font.Bold=-1;soft(function(){range.Font.Color.RGB=rgb(color);});soft(function(){box.TextFrame.WordWrap=-1;});return box;}
   function accentBar(slide,left,top,w){soft(function(){var bar=slide.Shapes.AddShape(1,left,top,w,4);soft(function(){bar.Fill.Visible=-1;bar.Fill.Solid();});soft(function(){bar.Fill.Transparency=0;});bar.Fill.ForeColor.RGB=rgb(ACCENT);bar.Line.Visible=0;});}
   // 大纲的一页：只有一行时做成章节页（大字、居中偏上），有正文时做成“标题 + 强调线 + 要点”。
-  function outlinePage(slide,page,font,width,height){
+  function outlinePage(slide,page,font,width,height,cover){
     var lines=page.trim().split('\n'),title=lines.shift().replace(/^#{1,6}\s+/,'').trim(),points=lines.map(function(x){return x.replace(/^\s*[-*•·]\s+/,'').trim();}).filter(Boolean),margin=Math.round(width*0.07);
     if(!points.length){var size=Array.from(title).length>18?32:40;textBox(slide,margin,height*0.36,width-margin*2,size*2.6,title,font,size,INK,true);accentBar(slide,margin+7,height*0.36-14,56);return;}
     var titleSize=Array.from(title).length>22?24:28,titleTop=Math.round(height*0.08);
@@ -34,6 +34,7 @@
     var barTop=titleTop+titleSize*1.9+6;accentBar(slide,margin+7,barTop,48);
     var body=points.join('\r'),total=body.length,bodySize=total>400||points.length>9?16:total>200||points.length>6?18:20,top=barTop+22;
     var box=textBox(slide,margin,top,width-margin*2,height-top-height*0.08,body,font,bodySize,BODY,false),para=box.TextFrame.TextRange;
+    if(cover&&points.length===1){soft(function(){para.ParagraphFormat.Bullet.Visible=0;});return;}
     // 实测 WPS 12.1：只设 Visible/Character 会显示成“1. 2. 3.”，要先把类型设成圆点（ppBulletUnnumbered=1）。
     soft(function(){para.ParagraphFormat.Bullet.Visible=-1;});soft(function(){para.ParagraphFormat.Bullet.Type=1;});soft(function(){para.ParagraphFormat.Bullet.Character=8226;});
     soft(function(){para.ParagraphFormat.Bullet.Font.Color.RGB=rgb(ACCENT);});
@@ -62,7 +63,7 @@
         for(var i=1;i<Math.max(rows.length,2);i+=9){var group=[rows[0]].concat(rows.slice(i,i+9));var size=tableFontSize(group.length,group[0].length,width,height);var slide=addSlide();var shape=slide.Shapes.AddTable(group.length,group[0].length,30,50,width-60,Math.min(height-100,group.length*size*2));var grid=[];for(var r=0;r<group.length;r++)for(var c=0;c<group[r].length;c++){var box=shape.Table.Cell(r+1,c+1);(grid[r]=grid[r]||[])[c]=box;var cell=box.Shape.TextFrame.TextRange;cell.Text=group[r][c];cell.Font.Name=font;cell.Font.Size=size;if(block.format&&L.applyModuleStyle){var original=i+r-1,style=Object.assign({},block.format.base,block.format.cells&&block.format.cells[r===0?0:original]&&block.format.cells[r===0?0:original][c]);L.applyModuleStyle(cell,style,true,true);if(style.background)try{box.Shape.Fill.ForeColor.RGB=L.officeColor(style.background);}catch(ignore){}}if(r===0)cell.Font.Bold=-1;}}tableLook(grid,group,!!block.format);
       }else{
         var paragraphs=block.format&&block.format.paragraphs,lines=String(block.text||'').split('\n'),pages;if(paragraphs&&paragraphs.some(function(p){return p.level;})){pages=[];lines.forEach(function(line,i){if(paragraphs[i]&&paragraphs[i].level||!pages.length)pages.push(line);else pages[pages.length-1]+='\n'+line;});pages=pages.filter(function(p){return p.trim();});}else pages=String(block.text||'').split(/\n\s*\n/).filter(function(p){return p.trim();});if(!pages.length)throw Error('没有可生成幻灯片的内容。');if(pages.length>30)throw Error('一次最多新建 30 页，请拆分内容。');for(var n=0;n<pages.length;n++)if(pages[n].length>1200)throw Error('一页文字超过 1200 字，请用空行分成多页。');
-        pages.forEach(function(page){outlinePage(addSlide(),page,font,width,height);});
+        pages.forEach(function(page,i){outlinePage(addSlide(),page,font,width,height,i===0);});
       }
       return added.length;
     }catch(e){var failed=false;for(var k=added.length-1;k>=0;k--)try{added[k].Delete();}catch(ignore){failed=true;}throw Error(e.message+(added.length?(failed?' 部分页可能已插入，请检查并使用 WPS 撤销。':' 新增页面已回退。'):''));}

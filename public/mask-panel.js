@@ -2,7 +2,7 @@
 // 规则：只认号码和词表里的词，不猜姓名地址；默认另存副本，原文件不动；对照表加密存在本机，可以还原。
 // 界面文字直接按当前语言写（M(中文, 日文)），整块不交给整页翻译；切换语言时重画。
 (function(root){'use strict';
-var E=root.MaskEngine,H=root.MaskHost,box=null,S=null,busy=false,found=[],foundModules=[],lastScope='';
+var E=root.MaskEngine,H=root.MaskHost,box=null,S=null,busy=false,found=[],foundModules=[],lastScope='',lastDocument='';
 function ja(){try{return root.OfficeI18n&&root.OfficeI18n.lang()==='ja';}catch(e){return false;}}
 function M(zh,jp){return ja()?jp:zh;}
 function el(tag,cls,text){var e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e;}
@@ -12,7 +12,7 @@ function lang(){return ja()?'ja':'zh';}
 async function post(body){var f=root.fetch.bind(root),s=await f('/api/session').then(function(r){if(!r.ok)throw Error(M('本机服务没有连接。','ローカルサービスに接続できません。'));return r.json();});
  var r=await f('/api/tools/mask',{method:'POST',headers:{'Content-Type':'application/json','X-Coach-Token':s.token},body:JSON.stringify(Object.assign({lang:lang()},body))}),d=await r.json().catch(function(){return {};});if(!r.ok)throw Error(d.error||M('没有完成，请重试。','完了できませんでした。もう一度お試しください。'));return d;}
 function say(m,bad){var s=$('mkStatus');if(!s)return;s.textContent=m||'';s.className='mk-status'+(bad?' bad':'');}
-function task(fn){if(busy)return;busy=true;box.querySelectorAll('button,input,select,textarea').forEach(function(b){b.disabled=true;});
+function task(fn){if(busy)return;checkDocument();busy=true;box.querySelectorAll('button,input,select,textarea').forEach(function(b){b.disabled=true;});
  Promise.resolve().then(fn).catch(function(e){var m=String(e&&e.message||e);try{if(ja()&&root.OfficeI18n&&root.OfficeI18n.t)m=root.OfficeI18n.t(m);}catch(ignore){}say(/^(已取消|キャンセル)/.test(m)?m:M('未完成：','完了できませんでした：')+m,true);}).then(function(){busy=false;box.querySelectorAll('button,input,select,textarea').forEach(function(b){b.disabled=false;});sync();});}
 var MODES=[['star','中间打码','一部を伏せ字','138****5678、张*','090-****-5678、田*'],['block','整段遮住','全部を黒塗り','■■■■■■','■■■■■■'],['code','换成代号','記号に置き換え','【电话1】、【名称A】，同一个始终同一个代号','【電話1】、【名称A】（同じ内容は同じ記号）']];
 function scope(){var r=box.querySelector('input[name="mkScope"]:checked');return r?r.value:'all';}
@@ -52,6 +52,7 @@ async function scan(){foundModules=[];found=[];var sc=scope();lastScope=sc;if(!t
 
 // ---------- 脱敏 ----------
 function chosen(){var set={};$('mkFound').querySelectorAll('input[type=checkbox]').forEach(function(c){if(c.checked){var x=found[Number(c.dataset.i)];if(x)set[x.type+'\u0001'+x.value]=1;}});return set;}
+function copyDocument(ad,path){ad.copy(path);lastDocument=documentKey();}
 async function apply(){var sc=scope();if(sc!==lastScope||(!found.length&&!foundModules.length))await scan();if(sc==='modules')return applyModules();if(!found.length)return;
  var pick=chosen(),kinds=Object.keys(pick).length;if(!kinds)throw Error(M('清单里一个都没勾。','一覧で何も選ばれていません。'));
  var ad=H.adapter(),info=await ad.info(),office=!!ad.office,inplace=office||$('mkInplace').checked,m=mode(),total=found.filter(function(x){return pick[x.type+'\u0001'+x.value];}).reduce(function(s,x){return s+x.count;},0);
@@ -59,7 +60,7 @@ async function apply(){var sc=scope();if(sc!==lastScope||(!found.length&&!foundM
  var msg=M('将把 '+kinds+' 种内容（共 '+total+' 处）'+modeName(m)+'。\n','選んだ '+kinds+' 種類（計 '+total+' か所）を「'+modeName(m)+'」にします。\n')+(inplace?(office?M('Office 版不能自动另存副本，会直接改当前文件。还没另存过副本的话，请先点“取消”，用「文件 → 另存为」存一份副本，在副本里再做。\n','Office 版では自動でコピーを保存できないため、今のファイルを直接変更します。まだコピーを保存していない場合は「キャンセル」し、「ファイル → 名前を付けて保存」でコピーを作ってから実行してください。\n'):M('直接改当前文件（不另存副本）。\n','今のファイルを直接変更します（コピーを作りません）。\n')):M('先另存为副本：\n'+target.path+'\n在副本里改，原文件不动。\n','先にコピーを保存し、コピーの方を変更します（元のファイルはそのまま）：\n'+target.path+'\n'))+M('对照表加密保存在这台电脑上，以后可以还原。是否继续？','対応表はこのパソコンに暗号化して保存し、あとで元に戻せます。続行しますか？');
  if(!ask(msg))throw Error(M('已取消。','キャンセルしました。'));
  if(!inplace){if(info.hasPath&&!info.saved&&ask(M('原文件有还没保存的修改。先保存原文件吗？\n“确定”：保存后再做副本；“取消”：不保存，这些修改只进副本。','元のファイルに未保存の変更があります。先に保存しますか？\n「OK」：保存してからコピー／「キャンセル」：保存せず、変更はコピーにだけ入ります。'))){try{(root.OfficeTools.host()==='et'?root.OfficeTools.app().ActiveWorkbook:root.OfficeTools.host()==='wpp'?root.OfficeTools.app().ActivePresentation:root.OfficeTools.app().ActiveDocument).Save();}catch(e){throw Error(M('原文件没能保存：','元のファイルを保存できませんでした：')+e.message);}}
-  say(M('正在另存副本…','コピーを保存しています…'));ad.copy(target.path);}
+  say(M('正在另存副本…','コピーを保存しています…'));copyDocument(ad,target.path);}
  var note=await ad.prepare(!inplace);say(M('正在脱敏…','マスキングしています…'));
  var segs=await ad.segments(sc),o=opts(),sess=E.session({mode:m,lang:lang(),words:words()}),data={scope:sc,exact:ad.exact?{}:null,seq:ad.exact?null:{}},counts={},all=[],skipped=0;
  function keep(h){return pick[h.type+'\u0001'+h.value];}
@@ -95,7 +96,7 @@ async function restoreDoc(id){var ad=H.adapter(),info=await ad.info();
  if(rec.host!==ad.host)throw Error(M('这份对照表是在'+hostName(rec.host)+'里做的，请在'+hostName(rec.host)+'里打开文件再还原。','この対応表は '+hostName(rec.host)+' で作られました。'+hostName(rec.host)+' でファイルを開いてから元に戻してください。'));
  var office=!!ad.office,inplace=office||$('mkInplace').checked,target=inplace?null:await post({action:'target',source:info.path,name:info.name,suffix:'restore'});
  if(!ask(M('将按对照表（'+when(rec.created)+'，'+rec.total+' 处）把脱敏的内容换回原文。\n','対応表（'+when(rec.created)+'・'+rec.total+' か所）に従って、マスキングした内容を元に戻します。\n')+(inplace?M('直接改当前文件。','今のファイルを直接変更します。'):M('另存为：\n'+target.path+'\n脱敏的文件不动。','次の名前で保存します（マスキングしたファイルはそのまま）：\n'+target.path))+M('\n是否继续？','\n続行しますか？')))throw Error(M('已取消。','キャンセルしました。'));
- if(!inplace)ad.copy(target.path);await Promise.resolve(ad.prepare(!inplace));
+ if(!inplace)copyDocument(ad,target.path);await Promise.resolve(ad.prepare(!inplace));
  var data=rec.data||{},segs=await ad.segments('all'),done=0,missing=0;
  if(data.exact){var map={};segs.forEach(function(s){map[s.key]=s;});var keys=Object.keys(data.exact);
   if(ad.backMany){var oks=await ad.backMany(keys.map(function(k){return {key:k,entry:data.exact[k]};}));oks.forEach(function(ok){if(ok)done++;else missing++;});}
@@ -147,7 +148,9 @@ function build(){var host=document.querySelector('section[data-panel="files"]'),
  if(root.MaskClipboard)root.MaskClipboard.mount(box,{M:M,el:el,post:post,say:say,task:task,opts:opts,lang:lang,refresh:refresh});box.append(rest);
  if(office)host.after(box);else{var anchor=$('mailMergeSection')||$('pasteBarSection');if(anchor)anchor.after(box);else host.parentNode.insertBefore(box,host);}
  sync();if(S){fillProfiles();renderRecords();}}
-async function start(){build();try{await refresh();build();}catch(e){if(box)say(e.message,true);}}
+function documentKey(){try{var T=root.OfficeTools;if(!T)return '';var a=T.app(),h=T.host(),d=h==='et'?a.ActiveWorkbook:h==='wpp'?a.ActivePresentation:a.ActiveDocument;return h+'|'+String(d.FullName||d.Name);}catch(ignore){return '';}}
+function checkDocument(){var key=documentKey();if(busy)return;if(key!==lastDocument){lastDocument=key;found=[];foundModules=[];lastScope='';if(box){renderFound();say('');sync();}}}
+async function start(){lastDocument=documentKey();if(typeof setInterval==='function')setInterval(checkDocument,500);build();try{await refresh();build();}catch(e){if(box)say(e.message,true);}}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);else start();
 try{if(root.OfficeI18n&&root.OfficeI18n.onChange)root.OfficeI18n.onChange(function(){found=[];foundModules=[];build();});}catch(ignore){}
 root.MaskPanel={scan:function(){return task(scan);},refresh:refresh,restorePlan:restorePlan,groupSegs:groupSegs};

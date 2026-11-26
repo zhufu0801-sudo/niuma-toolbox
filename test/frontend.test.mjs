@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
 import {TOOL_MODULES} from './helpers/tools-code.mjs';
 import {createClock,createDocument,createApp,createSharedBrowser,createFetch,loadScripts,flush} from './helpers/frontend-fakes.mjs';
 
@@ -20,6 +21,31 @@ function openWorld({broadcast=true,localStorage=true,app=createApp(),host='wpp'}
   return {ribbon,pane,doc,panels,app,alerts,clock,replaced,mountPane(){loadScripts(pane,[...TOOL_MODULES,'pane-bridge.js','studio-launch.js','tools-ui.js']);}};
 }
 const visiblePanel=w=>[...new Set(w.panels.filter(p=>!p.hidden).map(p=>p.dataset.panel))];
+
+test('完成提示请求前置；切换工作簿和语言清理旧状态；侧栏标题随语言更新',async()=>{
+ const clock=createClock(),app=createApp();app.ActiveWorkbook={Name:'a.xlsx'};let language='zh';const changes=[];
+ const i18n={lang:()=>language,t:s=>language==='ja'?'JA:'+s:s,onChange:f=>changes.push(f)};
+ const T={host:()=> 'et',app:()=>app,runFromUi:async()=> '已删除 2 行重复数据',list:()=>[{id:'removeDuplicates',group:'sheetplus'}]};
+ const ctx=loadScripts({...clock,OfficeI18n:i18n,OfficeTools:T,location:{origin:ORIGIN},alert(){},PaneBridge:{view:x=>x,request:async()=>true}},['main.js']);
+ ctx.OnAction({Id:'removeDuplicates'});await flush();
+ assert.equal(app.dialogs.length,1);assert.equal(app.dialogs[0][11],true);assert.equal(app.dialogs[0][9],true);assert.equal(app.StatusBar,'已删除 2 行重复数据');
+ app.ActiveWorkbook={Name:'b.xlsx'};await clock.advance(500);assert.equal(app.StatusBar,false);
+ ctx.OnAction({Id:'toolsOpen'});await flush();assert.equal(app.panes[0].title,'办公工具箱');
+ ctx.OnAction({Id:'removeDuplicates'});await flush();language='ja';changes.forEach(f=>f());
+ assert.equal(app.StatusBar,false);assert.equal(app.panes.at(-1).title,'JA:办公工具箱');assert.equal(app.panes[0].deleted,true);
+});
+
+test('表格功能区常用三项只显示一份，后部入口仍可见',()=>{
+ const w=openWorld({host:'et'});
+ for(const id of ['spotlight','sheetCheck','formulaOpen']){assert.equal(w.ribbon.GetVisible({Id:id}),false);assert.equal(w.ribbon.GetVisible({Id:'ce_'+id}),true);}
+ for(const id of ['dateMenu','officeMenu','printMenu'])assert.equal(w.ribbon.GetVisible({Id:id}),true);
+ assert.equal(w.ribbon.GetVisible({Id:'sheetCompactGroup'}),true);
+ const xml=fs.readFileSync(new URL('../public/ribbon.xml',import.meta.url),'utf8');
+ for(const id of ['sheetGroup','sheetPlusGroup','sheetDataGroup'])assert.match(xml,new RegExp('<menu id="'+id+'"'));
+ const ids=[...xml.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);assert.equal(new Set(ids).size,ids.length);
+ assert.doesNotMatch(xml,/<button[^>]*id="ce_[^"]+"[^>]*size="large"/);
+ for(const id of ['officeGroup','printGroup'])assert.ok(xml.indexOf('id="'+id+'"')<xml.indexOf('id="fileGroup"'));
+});
 
 test('ribbon: first click creates the pane on the requested view',async()=>{
   const w=openWorld();

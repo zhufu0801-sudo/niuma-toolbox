@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 import {toolsCode} from './helpers/tools-code.mjs';
 const code=toolsCode();
-function bridge(a,confirm=()=>true){const asked=[];const window={Application:a,confirm:m=>{asked.push(m);return confirm(m);}};vm.runInNewContext(code,{window,location:{pathname:'/addon/wps/',search:''},URLSearchParams,Date});window.OfficeTools.asked=asked;return window.OfficeTools;}
+function bridge(a,confirm=()=>true){const asked=[];const window={Application:a,confirm:m=>{asked.push(m);return confirm(m);}};vm.runInNewContext(code+'\n'+fs.readFileSync(new URL('../public/postal-format.js',import.meta.url),'utf8')+'\n'+fs.readFileSync(new URL('../public/tools/postal.js',import.meta.url),'utf8'),{window,location:{pathname:'/addon/wps/',search:''},URLSearchParams,Date});window.OfficeTools.asked=asked;return window.OfficeTools;}
 
 // 简化的 WPS 文字文档：段落按顺序排，含 \f（分页符）的段落之后换页；sec=true 表示段落里有分节符。
 function wordDoc(paras,opts={}){
@@ -26,6 +26,14 @@ function wordDoc(paras,opts={}){
   return {a,d,P,shrunk};
 }
 
+test('带详细确认的文档工具与 FORM_FIRST 工具不再叠加通用确认',()=>{
+ const T=bridge({ActiveDocument:{}});
+ for(const id of ['deleteBlankPages','officialFormatCn','businessFormatJa','landscapePages','fixPageJump','pictureFix','noBreakLatin','tableBeautify','boldInlineHeads','alignOptions','wordToPpt','jaStyle','proofCheck','captionNumbers','fixListNumbering'])assert.ok(T.describe(id,'wps').ownConfirm.includes('wps'),id);
+ for(const id of ['postalFill','wanUnit','idCheck','mergeWorkbooks','codesBatch'])assert.ok(T.describe(id,'et').ownConfirm.includes('et'),id);
+ for(const id of ['slidesToImages','handoutPdf'])assert.ok(T.describe(id,'wpp').ownConfirm.includes('wpp'),id);
+ assert.ok(!T.describe('removeWatermark','wps').ownConfirm?.includes('wps'),'没有自身确认的工具保留通用确认');
+});
+
 test('删除空白页：只删空白页上的空段落和分页符，内容页不动',async()=>{
   const {a,P}=wordDoc(['第一页正文\r','\f\r','\r','\f\r','第三页正文\r']);
   const T=bridge(a);const r=await T.run('deleteBlankPages',{host:'wps'});
@@ -33,6 +41,26 @@ test('删除空白页：只删空白页上的空段落和分页符，内容页�
   assert.deepEqual(P.map(p=>p.text),['第一页正文\r','\f\r','第三页正文\r']);
   assert.match(r,/已删除 2 处.*原来共 3 页，空白的是第 2 页/);
 });
+test('删除空白页：文末两个 Ctrl+Enter（含空格）删掉，保留最终段落标记',async()=>{
+ const m=wordDoc(['正文\r',' \f\r','\f\r']);
+ const original=m.d.Range;m.d.Range=(s,e)=>{const r=original(s,e);r.Delete=()=>{const p=m.P.find(p=>s>=p.start&&e<=p.end);if(p&&s===p.start&&e===p.end-1)p.text=p.text.slice(-1);else {const hit=m.P.filter(p=>p.start>=s&&p.end<=e);hit.forEach(p=>m.P.splice(m.P.indexOf(p),1));}};return r;};
+ const T=bridge(m.a);assert.match(await T.runFromUi('deleteBlankPages'),/已删除 2 处/);
+ assert.equal(T.asked.length,1);assert.equal(m.P.map(p=>p.text).join(''),'正文\r\r');assert.equal(m.d.Content.Information(4),1);
+});
+
+test('日文商务文书：日期、收件人、发件人和真正标题分别排版；公文日期和发文字号不当标题',async()=>{
+ function model(lines){const ps=lines.map(t=>({Range:{Text:t+'\r',Font:{Size:10.5,Bold:0},ParagraphFormat:{},Information:()=>false}}));ps.forEach((p,i)=>{p.Range.Start=i;p.Range.End=i+1;});
+ const section={PageSetup:{},Footers:{Item:()=>({Range:{Text:'已有页脚'}})}};
+ const d={Name:'t.docx',Content:{Paragraphs:{Count:ps.length,Item:i=>ps[i-1]}},Sections:{Count:1,Item:()=>section},Range:s=>ps[s].Range};return {ps,T:bridge({ActiveDocument:d})};}
+ const m=model(['2026年11月26日','株式会社お客様','営業部 御中','株式会社送り主','年末年始休業のお知らせ','拝啓 平素より','記','休業期間','以上']);
+ await m.T.runFromUi('businessFormatJa');assert.equal(m.T.asked.length,1);
+ assert.deepEqual(m.ps.map(p=>p.Range.ParagraphFormat.Alignment),[2,0,0,2,1,3,1,3,2]);
+ assert.equal(m.ps[4].Range.Font.Size,14);assert.equal(m.ps[4].Range.Font.Bold,1);assert.equal(m.ps[0].Range.Font.Bold,0);
+ for(const i of [0,1,2,3,4,6,8])assert.equal(m.ps[i].Range.ParagraphFormat.FirstLineIndent,0);
+ const cn=model(['2026年11月26日','办公〔2026〕12号','关于放假的通知','这是正文。']);await cn.T.runFromUi('officialFormatCn');
+ assert.equal(cn.T.asked.length,1);assert.equal(cn.ps[2].Range.Font.Size,22);assert.equal(cn.ps[0].Range.Font.Size,16);assert.equal(cn.ps[1].Range.Font.Size,16);
+});
+
 test('删除空白页：分节符造成的空白页不删除，只提示',async()=>{
   const {a,P}=wordDoc(['正文\r',{text:'\r',sec:true},'下一节正文\r']);
   P[0].text='正文\f\r';

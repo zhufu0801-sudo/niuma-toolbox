@@ -10,6 +10,12 @@ function load(file,name){const ctx={};ctx.window=ctx;vm.runInNewContext(read(fil
 // ---------- 宏代码检查 ----------
 const V=load('public/vba-lint.js','VbaLint');
 const codes=src=>V.lint(src).findings.map(f=>f.sev+':'+f.code+'@'+f.line);
+test('宏检查：中日文过程、属性、循环变量与跳转标签',()=>{
+ const src='Option Explicit\nSub 删除空行()\nGoTo 終了処理\n終了処理:\nEnd Sub\nFunction 合計(x)\n合計 = x\nEnd Function\nProperty Get 氏名()\nEnd Property\nSub 集計()\nFor 行番号 = 1 To 3\nNext 行番号\nEnd Sub';
+ same(codes(src),[]);
+ assert.ok(codes('Sub 删除空行()\nGoTo 不存在\nEnd Sub').some(x=>x.startsWith('error:LABEL')));
+ assert.ok(codes('Sub 删除空行()\nEnd Sub\nSub 删除空行()\nEnd Sub').some(x=>x.startsWith('error:DUP')));
+});
 test('宏检查：块没写完、Next 变量不对、Else 没有 If、多余的 End If 都能找到',()=>{
   const r=codes('Sub A()\n  If x Then\n    y = 1\n  For i = 1 To 3\n  Next j\nEnd Sub\nSub B()\n  End If\nEnd Sub\nFunction C()\n  With ActiveSheet\nEnd Function');
   assert.ok(r.includes('error:NEXTVAR@5'));assert.ok(r.includes('error:BLOCK@6'));assert.ok(r.includes('error:BLOCK@8'));assert.ok(r.includes('error:BLOCK@12'));

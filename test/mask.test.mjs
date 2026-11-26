@@ -15,6 +15,16 @@ const ID=idNo('11010119900307123');
 // 侧栏的 MaskHost / MaskPanel 在没有界面的环境里加载（只用到它们的纯函数和程序适配）
 function browser(){const ctx={console};ctx.window=ctx;ctx.document={readyState:'complete',querySelector:()=>null,getElementById:()=>null};vm.runInNewContext(read('mask-engine.js')+'\n'+read('mask-host.js')+'\n'+read('mask-panel.js'),ctx);return ctx;}
 
+test('脱敏侧栏切换文档清理命中清单和结果，不清空用户词表',()=>{
+ const elements={},get=id=>elements[id]||(elements[id]={textContent:'旧结果',value:'张伟',checked:false});
+ const app={ActiveDocument:{FullName:'C:/a.docx'}},ctx={OfficeTools:{app:()=>app,host:()=> 'wps'},document:{readyState:'loading',addEventListener(){},getElementById:get}};ctx.window=ctx;
+ // Expose closure state only in the test VM; production keeps it private.
+ const hook="root.qa={check:checkDocument,copy:copyDocument,seed:function(){box={querySelector:()=>({value:'all'})};found=[{value:'张伟'}];foundModules=[{}];lastDocument=documentKey();},counts:function(){return [found.length,foundModules.length];}};";
+ vm.runInNewContext(read('mask-panel.js').replace('root.MaskPanel={',hook+'root.MaskPanel={'),ctx);ctx.qa.seed();
+ ctx.qa.copy({copy:p=>{app.ActiveDocument.FullName=p;}},'C:/a-copy.docx');ctx.qa.check();same(ctx.qa.counts(),[1,1]);assert.equal(get('mkStatus').textContent,'旧结果');
+ app.ActiveDocument={FullName:'C:/b.docx'};ctx.qa.check();same(ctx.qa.counts(),[0,0]);assert.equal(get('mkStatus').textContent,'');assert.equal(get('mkFound').hidden,true);assert.equal(get('mkWords').value,'张伟');
+});
+
 test('识别：词表优先、长词优先，号码按校验位认，不猜姓名',async()=>{
   const E=await maskEngine(),w=E.parseWords('北京\n北京某某科技有限公司=客户甲\n# 备注\n张三');
   same(w.words.map(x=>x.word),['北京某某科技有限公司','北京','张三']);
@@ -71,8 +81,8 @@ test('AI 发送前：词表里的词也换成占位符，回答里换回来',asy
 
 // ---- WPS 文字：假的文档对象（正文 + 页眉两个文字流，段落以 \r 分隔）----
 function fakeWord(stories){
-  const st={};for(const [k,v] of Object.entries(stories))st[k]={text:v};
-  function range(story,s,e){return {get Start(){return s;},get End(){return e;},get Text(){return story.text.slice(s,e);},set Text(v){story.text=story.text.slice(0,s)+v+story.text.slice(e);e=s+v.length;},get Duplicate(){return range(story,s,e);},SetRange(a,b){s=a;e=b;},
+  const st={};for(const [k,v] of Object.entries(stories))st[k]={text:v,ranges:[]};
+  function range(story,s,e){const pos={s,e};story.ranges.push(pos);return {get Start(){return pos.s;},get End(){return pos.e;},get Text(){return story.text.slice(pos.s,pos.e);},set Text(v){const start=pos.s,end=pos.e,delta=v.length-(end-start);story.text=story.text.slice(0,start)+v+story.text.slice(end);for(const p of story.ranges){if(p.s>=end)p.s+=delta;if(p.e>=end)p.e+=delta;}pos.e=start+v.length;},get Duplicate(){return range(story,pos.s,pos.e);},SetRange(a,b){pos.s=a;pos.e=b;},
     get Paragraphs(){const list=[];let pos=0;story.text.split('\r').forEach((p,i,arr)=>{const end=pos+p.length+(i<arr.length-1?1:0);if(end>s&&pos<(e||1)||pos===s)list.push(range(story,pos,end));pos=end;});return {Count:list.length,Item:i=>({Range:list[i-1]})};}};}
   const d={Name:'合同.docx',FullName:'C:\\docs\\合同.docx',Saved:true,TrackRevisions:true,Revisions:{Count:0},savedAs:null,saves:0,vars:{},
     StoryRanges:{Item(t){if(!st[t])throw Error('none');return range(st[t],0,st[t].text.length);}},
@@ -99,6 +109,22 @@ test('WPS 文字：正文和页眉都改到，按位置改、核对原文，按�
   // 原文件有修订、又要直接改原文件：先停下来
   d.Revisions.Count=2;assert.throws(()=>ad.prepare(false),/修订/);
 });
+test('WPS 文字：四段变长与变短代号替换、部分选区和多段还原',()=>{
+ const c=browser(),E=c.MaskEngine,original='张伟在华东商贸\r电话13812345678\r张伟的身份证11010519491231002X\r再联系张伟\r';
+ const {app,st}=fakeWord({1:original}),ad=c.MaskHost.wpsWord(app),words=E.parseWords('张伟\n华东商贸').words;
+ const segs=ad.segments('all'),session=E.session({mode:'code',words}),seq=[];
+ const jobs=segs.map(seg=>{const hits=E.find(seg.text,{words}),r=E.apply(seg.text,hits,session);seq.push(...r.seq);return {seg,edits:hits.map((h,i)=>({start:h.start,end:h.end,expect:h.value,text:r.seq[i][0]}))};});
+ assert.equal(seq.length,6);
+ // Selection bounds are snapshots, evaluated against the original segment before any writes.
+ const sample={...segs[1],lo:segs[1].start+2,hi:segs[1].start+13};
+ assert.equal(ad.inside(sample,{start:2,end:13}),true);assert.equal(ad.inside(sample,{start:0,end:13}),false);
+ jobs.forEach(j=>assert.ok(ad.write(j.seg,j.edits).every(Boolean)));
+ assert.doesNotMatch(st[1].text,/张伟|华东商贸|13812345678|11010519491231002X/);
+ const group=ad.segments('all'),plan=c.MaskPanel.restorePlan(group,seq);assert.equal(plan.missing,0);
+ group.forEach((seg,i)=>assert.ok(ad.write(seg,plan.edits[i]).every(Boolean)));
+ assert.equal(st[1].text,original);
+});
+
 test('WPS 表格：整格记原值，公式、数字格式原样还原；批注、页眉也处理',async()=>{
   const ctx=browser(),E=ctx.MaskEngine,H=ctx.MaskHost;
   const cells={'1,1':{v:'姓名',f:'姓名',nf:'General'},'2,1':{v:'张三',f:'张三',nf:'General'},'2,2':{v:13812345678,f:'13812345678',nf:'0'},'3,1':{v:'张三',f:'=A2',nf:'General'}};

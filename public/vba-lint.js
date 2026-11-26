@@ -23,11 +23,11 @@ function F(sev,code,line,zh,ja,fixZh,fixJa,extra){var f={sev:sev,code:code,line:
 
 // ---- 块结构 ----
 var OPEN=[
- {re:/^(public\s+|private\s+|friend\s+)?(static\s+)?sub\s+([\w]+)/i,kind:'sub'},
- {re:/^(public\s+|private\s+|friend\s+)?(static\s+)?function\s+([\w]+)/i,kind:'function'},
- {re:/^(public\s+|private\s+|friend\s+)?(static\s+)?property\s+(get|let|set)\s+([\w]+)/i,kind:'property'},
- {re:/^(public\s+|private\s+)?type\s+\w+/i,kind:'type'},{re:/^(public\s+|private\s+)?enum\s+\w+/i,kind:'enum'},
- {re:/^with\b/i,kind:'with'},{re:/^select\s+case\b/i,kind:'select'},{re:/^for\s+each\s+(\w+)/i,kind:'for',each:true},{re:/^for\s+(\w+)\s*=/i,kind:'for'},
+ {re:/^(public\s+|private\s+|friend\s+)?(static\s+)?sub\s+([A-Za-z_\u0080-\uffff][\w\u0080-\uffff]*)/i,kind:'sub'},
+ {re:/^(public\s+|private\s+|friend\s+)?(static\s+)?function\s+([A-Za-z_\u0080-\uffff][\w\u0080-\uffff]*)/i,kind:'function'},
+ {re:/^(public\s+|private\s+|friend\s+)?(static\s+)?property\s+(get|let|set)\s+([A-Za-z_\u0080-\uffff][\w\u0080-\uffff]*)/i,kind:'property'},
+ {re:/^(public\s+|private\s+)?type\s+[A-Za-z_\u0080-\uffff][\w\u0080-\uffff]*/i,kind:'type'},{re:/^(public\s+|private\s+)?enum\s+[A-Za-z_\u0080-\uffff][\w\u0080-\uffff]*/i,kind:'enum'},
+ {re:/^with\b/i,kind:'with'},{re:/^select\s+case\b/i,kind:'select'},{re:/^for\s+each\s+([A-Za-z_\u0080-\uffff][\w\u0080-\uffff]*)/i,kind:'for',each:true},{re:/^for\s+([A-Za-z_\u0080-\uffff][\w\u0080-\uffff]*)\s*=/i,kind:'for'},
  {re:/^do\b/i,kind:'do'},{re:/^while\b/i,kind:'while'}];
 var CLOSE={'end sub':'sub','end function':'function','end property':'property','end type':'type','end enum':'enum','end with':'with','end select':'select','loop':'do','wend':'while','end if':'if'};
 var NAME={sub:['Sub','Sub'],function:['Function','Function'],property:['Property','Property'],type:['Type','Type'],enum:['Enum','Enum'],with:['With','With'],select:['Select Case','Select Case'],for:['For','For'],do:['Do','Do'],while:['While','While'],if:['If','If']};

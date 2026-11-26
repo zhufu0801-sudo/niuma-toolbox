@@ -29,6 +29,11 @@ test('PPT creates actual slide objects and rolls new slides back on API failure'
   const bad=slideApp(true);await assert.rejects(bridge(bad.a).run('makeSlides',{host:'wpp',text:'标题\n正文'}),/已回退/);assert.deepEqual(bad.deleted,[1]);
 });
 function fakeFetch(block,hook){return async url=>{if(url==='/api/session')return Response.json({token:'abc'});if(hook)hook();return Response.json({block,sourceHost:'wps'});};}
+test('按大纲制作 PPT：封面副标题不带项目符号，正文仍带圆点',async()=>{
+ const pages=[],d={Name:'cover.pptx',PageSetup:{SlideWidth:960,SlideHeight:540},Slides:{Count:0,Add(){const boxes=[];pages.push(boxes);this.Count++;return {Shapes:{AddTextbox(){const r={Font:{Color:{}},ParagraphFormat:{Bullet:{Font:{Color:{}}}}};boxes.push(r);return {TextFrame:{TextRange:r}};}}};}}};
+ await bridge({ActivePresentation:d}).run('makeSlides',{host:'wpp',text:'项目介绍\n2026年度计划\n\n工作安排\n任务一\n任务二'});
+ assert.equal(pages[0][1].ParagraphFormat.Bullet.Visible,0);assert.equal(pages[1][1].ParagraphFormat.Bullet.Visible,-1);assert.equal(pages[1][1].ParagraphFormat.Bullet.Type,1);
+});
 test('asynchronous transfer stops if the active document changed',async()=>{
   const a={ActiveDocument:doc(),Selection:{Range:{Start:1,End:4}}};const tool=bridge(a,fakeFetch({type:'text',text:'内容'},()=>{a.ActiveDocument={Name:'other.docx',FullName:'C:/other.docx'};}));
   await assert.rejects(tool.run('insertTransfer'),/已切换/);
