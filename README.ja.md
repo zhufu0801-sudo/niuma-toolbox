@@ -1,3 +1,7 @@
+**牛马之友 · 办公工具箱 / オフィスツールボックス / Niuma Toolbox**
+
+WPS / Microsoft Office 向け無料オープンソース：公文格式、删除空白页、表格体检、数据脱敏、です・ます変換、郵便番号、和暦。
+
 <p align="center">
   <img src="docs/images/banner-ja.png" alt="オフィスツールボックス" width="100%">
 </p>
@@ -18,6 +22,17 @@
   <img alt="WPS / Microsoft Office" src="https://img.shields.io/badge/WPS%20%7C%20Microsoft%20Office-supported-2e7d32">
   <img alt="Windows" src="https://img.shields.io/badge/Windows-%E2%9C%93-0078d4"> <img alt="macOS beta" src="https://img.shields.io/badge/macOS-beta-888">
 </p>
+
+## 紹介動画・操作ガイド
+
+![日本語の紹介動画](docs/promo/cover-ja.jpg)
+
+[日本語の紹介動画（MP4 ダウンロード）](https://github.com/zhufu0801-sudo/niuma-toolbox/releases/download/v0.16.0/%E3%82%AA%E3%83%95%E3%82%A3%E3%82%B9%E3%83%84%E3%83%BC%E3%83%AB%E3%83%9C%E3%83%83%E3%82%AF%E3%82%B9-%E7%B4%B9%E4%BB%8B%E5%8B%95%E7%94%BB-%E6%97%A5%E6%9C%AC%E8%AA%9E-v2.mp4) · [中国語の紹介動画（MP4）](https://github.com/zhufu0801-sudo/niuma-toolbox/releases/download/v0.16.0/%E7%89%9B%E9%A9%AC%E4%B9%8B%E5%8F%8B-%E5%AE%A3%E4%BC%A0%E8%A7%86%E9%A2%91-%E4%B8%AD%E6%96%87-v2.mp4)
+
+[日本語 PDF](docs/manual-ja.pdf) · [中文 PDF](docs/manual-zh.pdf) · [English PDF](docs/manual-en.pdf) · [紹介文](docs/promo/宣传视频文案-20261126.md)
+
+2026-11-26：Claude による完了ダイアログの枠線、WPS Writer リボンの重複削除とメニュー化、空白ページ削除後のページ数再計算は**変更済みですが、WPS 実機では未検証**です。Mac / Microsoft Office ホスト、VBA プロジェクトへの信頼アクセス、Word DOCX の目次更新は**未検証**です。
+
 
 ---
 
